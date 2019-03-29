@@ -1,5 +1,8 @@
 package com.newgen.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.newgen.mapper.BaseMapper;
 
 public abstract class BaseService<T> {
@@ -35,5 +38,9 @@ public abstract class BaseService<T> {
 
 	public T queryById(Object id) throws Exception {
 		return this.getMapper().queryById(id);
+	}
+	
+	public List<T> findList(Map<String, Object> var1) throws Exception {
+		return this.getMapper().findList(var1);
 	}
 }

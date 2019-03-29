@@ -3,35 +3,35 @@
   
 <mapper namespace="com.newgen.mapper.MemberPointsMapper" >
 
-<!-- Result Map-->
-<resultMap id="BaseResultMap" type="com.newgen.bean.MemberPoints" >
-	<result column="memberId" property="memberId" />
-	<result column="points" property="points" />
-	<result column="createTime" property="createTime" />
-	<result column="updateTime" property="updateTime" />
-</resultMap>
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.bean.MemberPoints" >
+		<result column="memberId" property="memberId" />
+		<result column="points" property="points" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+	</resultMap>
 
-<!-- sys_user table all fields -->
-<sql id="Base_Column_List" >
-	memberId, points, createTime, updateTime
-</sql>
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		memberId, points, createTime, updateTime
+	</sql>
 
-<!-- 插入记录 -->
-<insert id="add" parameterType="Object" >
-	insert into t_member_points(memberId, points, createTime, updateTime)
-	values(#{memberId}, #{points}, #{createTime}, #{updateTime})
-</insert>
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_member_points(memberId, points, createTime, updateTime)
+		values(#{memberId}, #{points}, #{createTime}, #{updateTime})
+	</insert>
 
-<select id="findByMemberId" resultMap="BaseResultMap" parameterType="Object">
-	select
-		<include refid="Base_Column_List" />
-	from t_member_points
-	where memberId = #{memberId}
-</select>
+	<select id="findByMemberId" resultMap="BaseResultMap" parameterType="Object">
+		select
+			<include refid="Base_Column_List" />
+		from t_member_points
+		where memberId = #{memberId}
+	</select>
 
-<!-- 根据id，修改记录-->  
-<update id="update" parameterType="Object">
-	update t_member_points set points = #{points}, updateTime = #{updateTime} where memberId = #{memberId}
-</update>
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object">
+		update t_member_points set points = #{points}, updateTime = #{updateTime} where memberId = #{memberId}
+	</update>
 
 </mapper>

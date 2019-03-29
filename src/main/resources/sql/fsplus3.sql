@@ -18,7 +18,7 @@ CREATE TABLE `t_member_points_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `memberId` int(11) DEFAULT NULL COMMENT '会员表主键，t_member.id',
   `points` int(11) DEFAULT NULL COMMENT '积分变更数',
-  `type` varchar(50) DEFAULT NULL COMMENT '积分变更类型，如：sign、read等',
+  `type` varchar(50) DEFAULT NULL COMMENT '积分变更类型，如：signIn、read等',
   `dataId` int(11) DEFAULT '0' COMMENT '对象主键，如：文章id、视频id等',
   `description` varchar(255) DEFAULT NULL COMMENT '积分变更描述，如：签到、阅读等',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
