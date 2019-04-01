@@ -43,4 +43,8 @@ public abstract class BaseService<T> {
 	public List<T> findList(Map<String, Object> var1) throws Exception {
 		return this.getMapper().findList(var1);
 	}
+	
+	public int count(Map<String, Object> var1)  throws Exception {
+		return findList(var1).size();
+	}
 }

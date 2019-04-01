@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.newgen.mapper.BaseMapper;
 import com.newgen.mapper.MemberPointsMapper;
 
-@Service("memberPointsService")
+@Service
 public class MemberPointsService<T> extends BaseService<T> {
 
 	@Autowired

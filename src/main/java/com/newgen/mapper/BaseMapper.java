@@ -23,4 +23,6 @@ public interface BaseMapper<T> {
 	T findByOneCondition(Object var1);
 
 	T findByMap(Map<String, Object> var1);
+	
+	Integer count(Map<String, Object> var1);
 }
