@@ -1,6 +1,5 @@
 package com.newgen.action;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import com.newgen.bean.MemberPoints;
 import com.newgen.bean.MemberPointsLog;
 import com.newgen.service.MemberPointsLogService;
 import com.newgen.service.MemberPointsService;
+import com.newgen.util.Constant.MemberPointsType;
 
 @Controller
 public class MemberController {
@@ -26,43 +26,45 @@ public class MemberController {
 	@Autowired
 	private MemberPointsLogService<MemberPointsLog> memberPointsLogService;
 	
+	@SuppressWarnings("rawtypes")
+	private Map result = new HashMap();
+	
 	@GetMapping(value = {"/getMemberPointsByMemberId"}, produces = {"application/json;charset=UTF-8"})
 	public @ResponseBody Map<?, ?> getMemberPointsByMemberId(@RequestParam(required = true) Integer memberId) {
-		MemberPoints memberPoints = memberPointsService.findByMemberId(memberId);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("ret", 1);
-		map.put("data", memberPoints);
-		return map;
+		return result(1, null, memberPointsService.findByMemberId(memberId));
 	}
 	
 	@PostMapping(value = {"/memberSignIn"}, produces = {"application/json;charset=UTF-8"})
 	public @ResponseBody Map<?, ?> memberSignIn(@RequestParam(required = true) Integer memberId) throws Exception {
+		if (increaseMemberPoints(memberId, MemberPointsType.SIGNIN)) {
+			return result(1, "签到成功", null);
+		}
+		return result(0, "已签到", null);
+	}
+	
+	private Boolean increaseMemberPoints(Integer memberId, MemberPointsType type) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
-		Map<String, Object> result = new HashMap<String, Object>();
 		params.put("isToday", 1);
 		params.put("memberId", memberId);
-		params.put("type", "signIn");
+		params.put("type", type.name());
 		List<MemberPointsLog> list = memberPointsLogService.findList(params);
-		if (list.size() == 0) {
-			MemberPointsLog memberPointsLog = new MemberPointsLog();
-			memberPointsLog.setMemberId(memberId);
-			memberPointsLog.setPoints(2);
-			memberPointsLog.setType("signIn");
-			memberPointsLog.setDataId(0);
-			memberPointsLog.setDescription("签到");
-			memberPointsLog.setCreateTime(new Date());
-			memberPointsLog.setUpdateTime(new Date());
-			memberPointsLogService.add(memberPointsLog);
-			
-			result.put("ret", 1);
-			result.put("msg", "签到成功");
-			result.put("data", memberPointsLog);
-			return result;
+		if (list.size() < type.getMaxTimes()) {
+			MemberPoints memberPoints = memberPointsService.findByMemberId(memberId);
+			memberPoints.setPoints(memberPoints.getPoints() + type.getPoints());
+			Boolean updateMemberPoints = memberPointsService.update(memberPoints);
+			if (updateMemberPoints) {
+				memberPointsLogService.add(memberPointsLogService.newMemberPointsLog(memberId, type));
+				return true;
+			}
 		}
-		
-		result.put("ret", 0);
-		result.put("msg", "已签到");
-		result.put("data", list.get(0));
+		return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Map<?, ?> result(Integer ret, String msg, Object data) {
+		this.result.put("ret", ret);
+		this.result.put("msg", msg);
+		this.result.put("data", data);
 		return result;
 	}
 }
