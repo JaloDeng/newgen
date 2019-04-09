@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.mapper.ActivityMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.bean.Activity" >
+		<result column="id" property="id" />
+		<result column="status" property="status" />
+		<result column="title" property="title" />
+		<result column="summary" property="summary" />
+		<result column="sponsorId" property="sponsorId" />
+		<result column="homePath" property="homePath" />
+		<result column="serialNumber" property="serialNumber" />
+		<result column="editor" property="editor" />
+		<result column="FromTime" property="FromTime" />
+		<result column="ToTime" property="ToTime" />
+		<result column="address" property="address" />
+		<result column="detail" property="detail" />
+		<result column="expenseExplanation" property="expenseExplanation" />
+		<result column="refundExplanation" property="refundExplanation" />
+		<result column="notice" property="notice" />
+		<result column="clickCount" property="clickCount" />
+		<result column="likeCount" property="likeCount" />
+		<result column="shareCount" property="shareCount" />
+		<result column="remark" property="remark" />
+		<result column="releaseTime" property="releaseTime" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+	</resultMap>
+
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, status, title, summary, sponsorId, homePath, serialNumber, editor, FromTime, ToTime, address, detail, 
+		expenseExplanation, refundExplanation, notice, clickCount, likeCount, shareCount, remark, 
+		releaseTime, createTime, updateTime
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_activity(title, summary, sponsorId, homePath, serialNumber, editor,
+							FromTime, ToTime, address, detail, expenseExplanation, refundExplanation,
+							notice, remark, createTime, updateTime
+		)
+		values(#{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
+			#{FromTime}, #{ToTime}, #{address}, #{detail}, #{expenseExplanation}, #{refundExplanation}, 
+			#{notice}, #{remark}, #{createTime}, #{updateTime})
+	</insert>
+	
+	<select id="findListForSearch" parameterType="Object" resultType="java.util.Map">
+		select a.id, a.status, a.title, a.summary, asp.name AS sponsor, IFNULL(a.homePath, '') AS homePath, a.serialNumber, a.clickCount, a.address
+		from t_activity a
+		inner join t_activity_sponsor asp on asp.id = a.sponsorId
+		order by a.releaseTime desc
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
+	</select>
+
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object">
+		update t_activity set title = #{title}, summary = #{summary}, homePath = #{homePath}, editor = #{editor},
+		fromTime = #{fromTime}, toTime = #{toTime}, address = #{address}, detail = #{detail}, 
+		expenseExplanation = #{expenseExplanation}, refundExplanation = #{refundExplanation}, 
+		notice = #{notice}, remark = #{remark}, createTime = #{createTime}, updateTime = #{updateTime}
+		where id = #{id}
+	</update>
+
+</mapper>
