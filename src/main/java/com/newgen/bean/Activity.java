@@ -39,6 +39,12 @@ public class Activity {
 	
 	private String notice;
 	
+	private Integer clickCount;
+	
+	private Integer likeCount;
+	
+	private Integer shareCount;
+	
 	private String remark;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -50,7 +56,7 @@ public class Activity {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 	
-	private List<ActivityPackage> activityExpenses;
+	private List<ActivityPackage> activityPackages;
 	
 	private List<ActivitySignUp> activitySignUps;
 	
@@ -180,6 +186,30 @@ public class Activity {
 		this.notice = notice;
 	}
 
+	public Integer getClickCount() {
+		return clickCount;
+	}
+
+	public void setClickCount(Integer clickCount) {
+		this.clickCount = clickCount;
+	}
+
+	public Integer getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(Integer likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public Integer getShareCount() {
+		return shareCount;
+	}
+
+	public void setShareCount(Integer shareCount) {
+		this.shareCount = shareCount;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
@@ -212,12 +242,12 @@ public class Activity {
 		this.updateTime = updateTime;
 	}
 
-	public List<ActivityPackage> getActivityExpenses() {
-		return activityExpenses;
+	public List<ActivityPackage> getActivityPackages() {
+		return activityPackages;
 	}
 
-	public void setActivityExpenses(List<ActivityPackage> activityExpenses) {
-		this.activityExpenses = activityExpenses;
+	public void setActivityPackages(List<ActivityPackage> activityPackages) {
+		this.activityPackages = activityPackages;
 	}
 
 	public List<ActivitySignUp> getActivitySignUps() {
@@ -258,10 +288,11 @@ public class Activity {
 				+ ", sponsorId=" + sponsorId + ", homePath=" + homePath + ", serialNumber=" + serialNumber + ", editor="
 				+ editor + ", fromTime=" + fromTime + ", toTime=" + toTime + ", address=" + address + ", detail="
 				+ detail + ", expenseExplanation=" + expenseExplanation + ", refundExplanation=" + refundExplanation
-				+ ", notice=" + notice + ", remark=" + remark + ", releaseTime=" + releaseTime + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + ", activityExpenses=" + activityExpenses
-				+ ", activitySignUps=" + activitySignUps + ", activityPaymentLogs=" + activityPaymentLogs
-				+ ", activityRefundLogs=" + activityRefundLogs + ", activityMemberLikes=" + activityMemberLikes + "]";
+				+ ", notice=" + notice + ", clickCount=" + clickCount + ", likeCount=" + likeCount + ", shareCount="
+				+ shareCount + ", remark=" + remark + ", releaseTime=" + releaseTime + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", activityPackages=" + activityPackages + ", activitySignUps="
+				+ activitySignUps + ", activityPaymentLogs=" + activityPaymentLogs + ", activityRefundLogs="
+				+ activityRefundLogs + ", activityMemberLikes=" + activityMemberLikes + "]";
 	}
 
 }

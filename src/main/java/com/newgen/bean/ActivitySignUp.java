@@ -13,7 +13,7 @@ public class ActivitySignUp {
 	
 	private Integer memberId;
 	
-	private Long activityExpenseId;
+	private Long activityPackageId;
 	
 	private String serialNumber;
 	
@@ -61,12 +61,12 @@ public class ActivitySignUp {
 		this.memberId = memberId;
 	}
 
-	public Long getActivityExpenseId() {
-		return activityExpenseId;
+	public Long getActivityPackageId() {
+		return activityPackageId;
 	}
 
-	public void setActivityExpenseId(Long activityExpenseId) {
-		this.activityExpenseId = activityExpenseId;
+	public void setActivityPackageId(Long activityPackageId) {
+		this.activityPackageId = activityPackageId;
 	}
 
 	public String getSerialNumber() {
@@ -144,7 +144,7 @@ public class ActivitySignUp {
 	@Override
 	public String toString() {
 		return "ActivitySignUp [id=" + id + ", activityId=" + activityId + ", memberId=" + memberId
-				+ ", activityExpenseId=" + activityExpenseId + ", serialNumber=" + serialNumber + ", status=" + status
+				+ ", activityPackageId=" + activityPackageId + ", serialNumber=" + serialNumber + ", status=" + status
 				+ ", amount=" + amount + ", channel=" + channel + ", signUpTime=" + signUpTime + ", cancelSignUpTime="
 				+ cancelSignUpTime + ", remark=" + remark + ", createTime=" + createTime + ", updateTime=" + updateTime
 				+ "]";

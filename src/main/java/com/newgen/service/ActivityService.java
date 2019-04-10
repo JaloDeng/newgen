@@ -16,7 +16,7 @@ public class ActivityService extends BaseService<Activity> {
 
 	@Autowired
 	private ActivityMapper activityMapper;
-
+	
 	@Override
 	public BaseMapper<Activity> getMapper() {
 		return this.activityMapper;
@@ -29,5 +29,10 @@ public class ActivityService extends BaseService<Activity> {
 			params.put("row", row);
 		}
 		return activityMapper.findListForSearch(params);
+	}
+	
+	@Override
+	public Activity queryById(Object id) throws Exception {
+		return activityMapper.queryById(id);
 	}
 }

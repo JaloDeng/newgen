@@ -28,6 +28,13 @@ public class ActivityController extends BaseController {
 	@Autowired
 	private ActivitySignUpService activitySignUpService;
 	
+	@ApiOperation("根据活动ID获取活动详细信息")
+	@GetMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody Map<?, ?> getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return result(1, null, activityService.queryById(id));
+	}
+	
 	@ApiOperation("获取活动列表")
 	@GetMapping(value = { "/getActivityList" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<?, ?> findList(@RequestParam(required = false) @ApiParam("页码") Integer page,

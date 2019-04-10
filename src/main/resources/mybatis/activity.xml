@@ -13,8 +13,8 @@
 		<result column="homePath" property="homePath" />
 		<result column="serialNumber" property="serialNumber" />
 		<result column="editor" property="editor" />
-		<result column="FromTime" property="FromTime" />
-		<result column="ToTime" property="ToTime" />
+		<result column="fromTime" property="fromTime" />
+		<result column="toTime" property="toTime" />
 		<result column="address" property="address" />
 		<result column="detail" property="detail" />
 		<result column="expenseExplanation" property="expenseExplanation" />
@@ -27,6 +27,16 @@
 		<result column="releaseTime" property="releaseTime" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
+		<collection property="activityPackages" ofType="com.newgen.bean.ActivityPackage">
+			<result column="ap_id" property="id" />
+			<result column="ap_activityId" property="activityId" />
+			<result column="ap_price" property="price" />
+			<result column="ap_quota" property="quota" />
+			<result column="ap_title" property="title" />
+			<result column="ap_explanation" property="explanation" />
+			<result column="ap_createTime" property="createTime" />
+			<result column="ap_updateTime" property="updateTime" />
+		</collection>
 	</resultMap>
 
 	<!-- sys_user table all fields -->
@@ -35,7 +45,7 @@
 		expenseExplanation, refundExplanation, notice, clickCount, likeCount, shareCount, remark, 
 		releaseTime, createTime, updateTime
 	</sql>
-
+	
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
 		insert into t_activity(title, summary, sponsorId, homePath, serialNumber, editor,
@@ -56,13 +66,33 @@
 			limit ${index}, ${row}
 		</if>
 	</select>
+	
+	<select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select 
+			a.*, 
+			ap.id ap_id,
+			ap.activityId ap_activityId,
+			ap.price ap_price,
+			ap.quota ap_quota,
+			ap.title ap_title,
+			ap.explanation ap_explanation,
+			ap.createTime ap_createTime,
+			ap.updateTime ap_updateTime
+		from t_activity a
+		inner join t_activity_package ap on ap.activityId = a.id
+		<where>
+		<if test="value != null and value > 0">
+			and a.id = #{value}
+		</if>
+		</where>
+	</select>
 
 	<!-- 根据id，修改记录-->  
 	<update id="update" parameterType="Object">
 		update t_activity set title = #{title}, summary = #{summary}, homePath = #{homePath}, editor = #{editor},
 		fromTime = #{fromTime}, toTime = #{toTime}, address = #{address}, detail = #{detail}, 
 		expenseExplanation = #{expenseExplanation}, refundExplanation = #{refundExplanation}, 
-		notice = #{notice}, remark = #{remark}, createTime = #{createTime}, updateTime = #{updateTime}
+		notice = #{notice}, remark = #{remark}, updateTime = #{updateTime}
 		where id = #{id}
 	</update>
 
