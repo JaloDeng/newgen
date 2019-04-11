@@ -23,6 +23,10 @@ public class ActivitySignUp {
 	
 	private String channel;
 	
+	private String name;
+	
+	private String phone;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date signUpTime;
 	
@@ -101,6 +105,22 @@ public class ActivitySignUp {
 		this.channel = channel;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public Date getSignUpTime() {
 		return signUpTime;
 	}
@@ -145,9 +165,9 @@ public class ActivitySignUp {
 	public String toString() {
 		return "ActivitySignUp [id=" + id + ", activityId=" + activityId + ", memberId=" + memberId
 				+ ", activityPackageId=" + activityPackageId + ", serialNumber=" + serialNumber + ", status=" + status
-				+ ", amount=" + amount + ", channel=" + channel + ", signUpTime=" + signUpTime + ", cancelSignUpTime="
-				+ cancelSignUpTime + ", remark=" + remark + ", createTime=" + createTime + ", updateTime=" + updateTime
-				+ "]";
+				+ ", amount=" + amount + ", channel=" + channel + ", name=" + name + ", phone=" + phone
+				+ ", signUpTime=" + signUpTime + ", cancelSignUpTime=" + cancelSignUpTime + ", remark=" + remark
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 
 }

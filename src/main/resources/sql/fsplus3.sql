@@ -12,7 +12,7 @@ CREATE TABLE `t_member_points` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`memberId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员积分表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员积分表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 会员积分变更日志表
@@ -28,7 +28,7 @@ CREATE TABLE `t_member_points_log` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='会员积分变更日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员积分变更日志表';
 
 
 
@@ -66,7 +66,7 @@ CREATE TABLE `t_activity` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动主办方表
@@ -86,7 +86,7 @@ CREATE TABLE `t_activity_sponsor` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动主办方表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动主办方表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动套餐表
@@ -102,7 +102,7 @@ CREATE TABLE `t_activity_package` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动套餐表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动套餐表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动报名表
@@ -112,11 +112,13 @@ CREATE TABLE `t_activity_sign_up` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `activityId` bigint(20) DEFAULT NULL COMMENT '活动表主键，t_activity.id',
   `memberId` int(11) DEFAULT NULL COMMENT '会员表主键，t_member.id',
-  `activityExpenseId` bigint(20) DEFAULT NULL COMMENT '活动费用表主键，t_activity_expense.id',
+  `activityPackageId` bigint(20) DEFAULT NULL COMMENT '活动费用表主键，t_activity_package.id',
   `serialNumber` varchar(100) DEFAULT NULL COMMENT '编号，流水号码，系统生成',
   `status` int(4) DEFAULT '0' COMMENT '状态，1：已签到、0：已报名、-1：已取消报名',
   `amount` decimal(10,2) DEFAULT '0.00' COMMENT '实际支付金额',
   `channel` varchar(150) DEFAULT NULL COMMENT '报名渠道',
+  `name` varchar(100) DEFAULT NULL COMMENT '姓名',
+  `phone` varchar(50) DEFAULT NULL COMMENT '手机号码',
   `signUpTime` datetime DEFAULT NULL COMMENT '报名时间',
   `cancelSignUpTime` datetime DEFAULT NULL COMMENT '取消报名时间',
   `remark` varchar(1000) DEFAULT NULL COMMENT '备注',
@@ -124,7 +126,7 @@ CREATE TABLE `t_activity_sign_up` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动报名表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动报名表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 会员收藏活动中间表
@@ -135,7 +137,7 @@ CREATE TABLE `t_activity_member_like` (
   `activityId` bigint(20) DEFAULT NULL COMMENT '活动表主键，t_activity.id',
   `memberId` bigint(20) DEFAULT NULL COMMENT '会员表主键，t_member.id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员收藏活动中间表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员收藏活动中间表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动支付记录表
@@ -150,7 +152,7 @@ CREATE TABLE `t_activity_payment_log` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动支付记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动支付记录表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动退款记录表
@@ -165,7 +167,7 @@ CREATE TABLE `t_activity_refund_log` (
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动退款记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动退款记录表';
 
 
 

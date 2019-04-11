@@ -18,7 +18,4 @@ public class ActivitySignUpService extends BaseService<ActivitySignUp> {
 		return this.activitySignUpMapper;
 	}
 	
-	public void add() {
-		
-	}
 }

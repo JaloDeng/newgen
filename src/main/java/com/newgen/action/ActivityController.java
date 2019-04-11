@@ -1,5 +1,6 @@
 package com.newgen.action;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.newgen.bean.ActivitySignUp;
 import com.newgen.service.ActivityService;
 import com.newgen.service.ActivitySignUpService;
 
@@ -28,7 +32,7 @@ public class ActivityController extends BaseController {
 	@Autowired
 	private ActivitySignUpService activitySignUpService;
 	
-	@ApiOperation("根据活动ID获取活动详细信息")
+	@ApiOperation("根据ID获取活动详细信息")
 	@GetMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<?, ?> getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -43,4 +47,22 @@ public class ActivityController extends BaseController {
 		return result(1, null, activityService.findListForSearch(page, row));
 	}
 	
+	@ApiOperation("新增活动报名")
+	@PostMapping(value = { "/activitySignUp" }, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody Map<?, ?> activitySignUp(@RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		activitySignUp.setStatus(0);
+		activitySignUp.setSignUpTime(new Date());
+		activitySignUp.setCreateTime(new Date());
+		activitySignUp.setUpdateTime(new Date());
+		activitySignUpService.add(activitySignUp);
+		return result(1, null, null);
+	}
+	
+	@ApiOperation("根据ID获取报名信息")
+	@GetMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody Map<?, ?> getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return result(1, null, activitySignUpService.queryById(id));
+	}
 }

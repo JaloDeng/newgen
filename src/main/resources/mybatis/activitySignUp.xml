@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.mapper.ActivitySignUpMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.bean.ActivitySignUp" >
+		<result column="id" property="id" />
+		<result column="activityId" property="activityId" />
+		<result column="memberId" property="memberId" />
+		<result column="activityPackageId" property="activityPackageId" />
+		<result column="serialNumber" property="serialNumber" />
+		<result column="status" property="status" />
+		<result column="amount" property="amount" />
+		<result column="channel" property="channel" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="signUpTime" property="signUpTime" />
+		<result column="cancelSignUpTime" property="cancelSignUpTime" />
+		<result column="remark" property="remark" />
+		<result column="refundTime" property="refundTime" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+	</resultMap>
+
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, activityId, memberId, activityPackageId, serialNumber, status, amount, 
+		channel, name, phone, signUpTime, cancelSignUpTime, remark, refundTime, createTime, updateTime
+	</sql>
+	
+	<!-- 查询条件 -->
+	<sql id="Example_Where_Clause">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="id != null" >
+		    and id = #{id}
+		</if>
+		<if test="activityId != null" >
+		    and activityId = #{activityId}
+		</if>
+		</trim>
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_activity_sign_up(activityId, memberId, activityPackageId, serialNumber, amount, 
+			channel, name, phone, remark, createTime, updateTime)
+		values(#{activityId}, #{memberId}, #{activityPackageId}, #{serialNumber}, #{amount}, 
+			#{channel}, #{name}, #{phone}, #{remark}, #{createTime}, #{updateTime})
+	</insert>
+	
+	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_sign_up 
+		<include refid="Example_Where_Clause"/>
+	</select>
+	
+	<select id="queryById" parameterType="Object" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_sign_up
+		where id = #{value}
+	</select>
+
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object">
+		update t_activity_sign_up set activityPackageId = #{activityPackageId}, amount = #{amount}, 
+			name = #{name}, phone = #{phone}, remark = #{remark}, updateTime = #{updateTime}
+		where id = #{id}
+	</update>
+
+</mapper>
