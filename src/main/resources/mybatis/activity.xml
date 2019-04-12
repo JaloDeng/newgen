@@ -58,9 +58,21 @@
 	</insert>
 	
 	<select id="findListForSearch" parameterType="Object" resultType="java.util.Map">
-		select a.id, a.status, a.title, a.summary, asp.name AS sponsor, IFNULL(a.homePath, '') AS homePath, a.serialNumber, a.clickCount, a.address
+		select 
+			a.id, 
+			a.status, 
+			a.title, 
+			a.summary, 
+			asp.name AS sponsor, 
+			asp.logoPath AS logoPath, 
+			IFNULL(a.homePath, '') AS homePath, 
+			case when COUNT(asp.id) &gt; 1 then CONCAT('¥', MIN(ap.price), '起') else if(ap.price = 0, '免费', CONCAT('¥', ap.price)) end AS price, 
+			a.serialNumber, 
+			a.clickCount, a.address
 		from t_activity a
 		inner join t_activity_sponsor asp on asp.id = a.sponsorId
+		inner join t_activity_package ap on ap.activityId = a.id
+		group by a.id
 		order by a.releaseTime desc
 		<if test="index != null and row != null">
 			limit ${index}, ${row}
