@@ -2,17 +2,13 @@ package com.newgen.bean;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class MemberPoints {
 
 	private Integer memberId;
 	private Integer points;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 	
 	public Integer getMemberId() {

@@ -2,8 +2,6 @@ package com.newgen.bean;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class MemberPointsLog {
 
 	private Long id;
@@ -18,10 +16,8 @@ public class MemberPointsLog {
 	
 	private String description;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 
 	public Long getId() {

@@ -3,8 +3,6 @@ package com.newgen.bean;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class Activity {
 
 	private Long id;
@@ -23,10 +21,8 @@ public class Activity {
 	
 	private String editor;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date fromTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date toTime;
 	
 	private String address;
@@ -47,13 +43,10 @@ public class Activity {
 	
 	private String remark;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date releaseTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 	
 	private List<ActivityPackage> activityPackages;

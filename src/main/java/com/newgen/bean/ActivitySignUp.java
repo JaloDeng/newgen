@@ -3,8 +3,6 @@ package com.newgen.bean;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ActivitySignUp {
 
 	private Long id;
@@ -27,18 +25,14 @@ public class ActivitySignUp {
 	
 	private String phone;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date signUpTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date cancelSignUpTime;
 	
 	private String remark;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
 
 	public Long getId() {
