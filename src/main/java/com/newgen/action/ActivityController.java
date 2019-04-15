@@ -37,7 +37,6 @@ public class ActivityController extends BaseController {
 	@Autowired
 	private ActivitySponsorService activitySponsorService;
 	
-	//TODO 添加参加活动的报名表
 	@ApiOperation("根据ID获取活动详细信息")
 	@GetMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<?, ?> getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)

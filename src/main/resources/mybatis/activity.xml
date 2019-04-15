@@ -37,6 +37,11 @@
 			<result column="ap_createTime" property="createTime" />
 			<result column="ap_updateTime" property="updateTime" />
 		</collection>
+		<collection property="activitySignUps" ofType="java.util.Map">
+			<result column="asu_id" property="id" />
+			<result column="asu_name" property="name" />
+			<result column="asu_phone" property="phone" />
+		</collection>
 	</resultMap>
 
 	<!-- sys_user table all fields -->
@@ -89,9 +94,13 @@
 			ap.title ap_title,
 			ap.explanation ap_explanation,
 			ap.createTime ap_createTime,
-			ap.updateTime ap_updateTime
+			ap.updateTime ap_updateTime,
+			asu.id AS asu_id,
+			asu.name AS asu_name,
+			asu.phone AS asu_phone
 		from t_activity a
 		inner join t_activity_package ap on ap.activityId = a.id
+		inner join t_activity_sign_up asu on asu.activityId = a.id
 		<where>
 		<if test="value != null and value > 0">
 			and a.id = #{value}
