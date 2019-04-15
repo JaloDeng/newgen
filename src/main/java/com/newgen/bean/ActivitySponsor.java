@@ -1,8 +1,7 @@
 package com.newgen.bean;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 public class ActivitySponsor {
 
@@ -26,11 +25,11 @@ public class ActivitySponsor {
 	
 	private String summary;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createTime;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date updateTime;
+	
+	private List<Activity> activities;
 
 	public Long getId() {
 		return id;
@@ -128,12 +127,20 @@ public class ActivitySponsor {
 		this.updateTime = updateTime;
 	}
 
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+
 	@Override
 	public String toString() {
 		return "ActivitySponsor [id=" + id + ", serialNumber=" + serialNumber + ", name=" + name + ", contact="
 				+ contact + ", phone=" + phone + ", address=" + address + ", logoPath=" + logoPath + ", score=" + score
 				+ ", declaration=" + declaration + ", summary=" + summary + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + "]";
+				+ ", updateTime=" + updateTime + ", activities=" + activities + "]";
 	}
 
 }
