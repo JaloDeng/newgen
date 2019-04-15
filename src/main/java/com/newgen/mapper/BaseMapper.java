@@ -14,6 +14,8 @@ public interface BaseMapper<T> {
 
 	List<T> findList(Map<String, Object> var1);
 
+	List<Map<?, ?>> findListMap(Map<String, Object> var1);
+
 	List<T> findAll();
 
 	T queryById(Object var1);
@@ -25,4 +27,5 @@ public interface BaseMapper<T> {
 	T findByMap(Map<String, Object> var1);
 	
 	Integer count(Map<String, Object> var1);
+
 }

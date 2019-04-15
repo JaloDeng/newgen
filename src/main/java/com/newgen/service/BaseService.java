@@ -41,10 +41,28 @@ public abstract class BaseService<T> {
 	}
 	
 	public List<T> findList(Map<String, Object> var1) throws Exception {
+		ifPaging(var1);
 		return this.getMapper().findList(var1);
+	}
+	
+	public List<Map<?, ?>> findListMap(Map<String, Object> var1) throws Exception {
+		ifPaging(var1);
+		return this.getMapper().findListMap(var1);
 	}
 	
 	public int count(Map<String, Object> var1)  throws Exception {
 		return findList(var1).size();
+	}
+	
+	private void ifPaging(Map<String, Object> var1) {
+		if (var1.containsKey("page") && var1.containsKey("row") && var1.get("page") != null && var1.get("row") != null) {
+			try {
+				Integer row = Integer.valueOf(var1.get("row").toString());
+				Integer index = (Integer.valueOf(var1.get("page").toString()) - 1) * row;
+				var1.put("index", index);
+			} catch (Exception e) {
+				
+			}
+		}
 	}
 }
