@@ -13,8 +13,7 @@ public class NewgenApplication {
 
 	@Bean
 	public ServletRegistrationBean<DispatcherServlet> servletRegistrationBean(DispatcherServlet dispatcherServlet) {
-		ServletRegistrationBean<DispatcherServlet> bean = new ServletRegistrationBean<DispatcherServlet>(dispatcherServlet, "*.do", "/");
-		return bean;
+		return new ServletRegistrationBean<DispatcherServlet>(dispatcherServlet, "*.do", "/");
 	}
 	
 	public static void main(String[] args) {
