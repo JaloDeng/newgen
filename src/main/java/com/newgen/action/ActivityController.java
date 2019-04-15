@@ -70,6 +70,13 @@ public class ActivityController extends BaseController {
 		return result(1, null, activitySponsorService.findList(params));
 	}
 	
+	@ApiOperation("根据ID获取活动主办方信息")
+	@GetMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody Map<?, ?> getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return result(1, null, activitySponsorService.queryById(id));
+	}
+	
 	@ApiOperation("新增活动报名")
 	@PostMapping(value = { "/activitySignUp" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody Map<?, ?> activitySignUp(@RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
@@ -82,5 +89,4 @@ public class ActivityController extends BaseController {
 		return result(1, null, null);
 	}
 	
-	//TODO 主办方+活动列表
 }

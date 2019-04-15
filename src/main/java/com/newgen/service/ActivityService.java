@@ -31,8 +31,4 @@ public class ActivityService extends BaseService<Activity> {
 		return activityMapper.findListForSearch(params);
 	}
 	
-	@Override
-	public Activity queryById(Object id) throws Exception {
-		return activityMapper.queryById(id);
-	}
 }
