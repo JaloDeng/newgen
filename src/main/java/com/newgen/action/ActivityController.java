@@ -50,7 +50,10 @@ public class ActivityController extends BaseController {
 	public @ResponseBody Map<?, ?> getActivityList(@RequestParam(required = false) @ApiParam("页码") Integer page,
 			@RequestParam(required = false) @ApiParam("行数") Integer row, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return result(1, null, activityService.findListForSearch(page, row));
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("page", page);
+		params.put("row", row);
+		return result(1, null, activityService.findList(params));
 	}
 	
 	@ApiOperation("根据ID获取报名信息")

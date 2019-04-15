@@ -57,7 +57,7 @@
 			#{notice}, #{remark}, #{createTime}, #{updateTime})
 	</insert>
 	
-	<select id="findListForSearch" parameterType="Object" resultType="java.util.Map">
+	<select id="findList" parameterType="Object" resultType="java.util.Map">
 		select 
 			a.id, 
 			a.status, 
