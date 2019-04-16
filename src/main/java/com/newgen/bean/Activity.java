@@ -58,6 +58,10 @@ public class Activity {
 	private List<ActivityRefundLog> activityRefundLogs;
 	
 	private List<ActivityMemberLike> activityMemberLikes;
+	
+	//表t_activity_sponsor字段，非本表字段
+	private String sponsor;
+	private String logoPath;
 
 	public Long getId() {
 		return id;
@@ -275,6 +279,22 @@ public class Activity {
 		this.activityMemberLikes = activityMemberLikes;
 	}
 
+	public String getSponsor() {
+		return sponsor;
+	}
+
+	public void setSponsor(String sponsor) {
+		this.sponsor = sponsor;
+	}
+
+	public String getLogoPath() {
+		return logoPath;
+	}
+
+	public void setLogoPath(String logoPath) {
+		this.logoPath = logoPath;
+	}
+
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", status=" + status + ", title=" + title + ", summary=" + summary
@@ -285,7 +305,8 @@ public class Activity {
 				+ shareCount + ", remark=" + remark + ", releaseTime=" + releaseTime + ", createTime=" + createTime
 				+ ", updateTime=" + updateTime + ", activityPackages=" + activityPackages + ", activitySignUps="
 				+ activitySignUps + ", activityPaymentLogs=" + activityPaymentLogs + ", activityRefundLogs="
-				+ activityRefundLogs + ", activityMemberLikes=" + activityMemberLikes + "]";
+				+ activityRefundLogs + ", activityMemberLikes=" + activityMemberLikes + ", sponsor=" + sponsor
+				+ ", logoPath=" + logoPath + "]";
 	}
 
 }

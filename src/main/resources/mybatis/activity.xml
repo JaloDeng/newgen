@@ -49,6 +49,53 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap id="mapBaseResult" type="com.newgen.bean.Activity" >
+		<result column="id" property="id" />
+		<result column="status" property="status" />
+		<result column="title" property="title" />
+		<result column="summary" property="summary" />
+		<result column="sponsorId" property="sponsorId" />
+		<result column="asp_sponsor" property="sponsor" />
+		<result column="asp_logoPath" property="logoPath" />
+		<result column="homePath" property="homePath" />
+		<result column="serialNumber" property="serialNumber" />
+		<result column="editor" property="editor" />
+		<result column="fromTime" property="fromTime" />
+		<result column="toTime" property="toTime" />
+		<result column="address" property="address" />
+		<result column="detail" property="detail" />
+		<result column="expenseExplanation" property="expenseExplanation" />
+		<result column="refundExplanation" property="refundExplanation" />
+		<result column="notice" property="notice" />
+		<result column="clickCount" property="clickCount" />
+		<result column="likeCount" property="likeCount" />
+		<result column="shareCount" property="shareCount" />
+		<result column="remark" property="remark" />
+		<result column="releaseTime" property="releaseTime" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+		<collection property="activityPackages" ofType="com.newgen.bean.ActivityPackage">
+			<result column="ap_id" property="id" />
+			<result column="ap_activityId" property="activityId" />
+			<result column="ap_price" property="price" />
+			<result column="ap_quota" property="quota" />
+			<result column="ap_title" property="title" />
+			<result column="ap_explanation" property="explanation" />
+			<result column="ap_createTime" property="createTime" />
+			<result column="ap_updateTime" property="updateTime" />
+		</collection>
+		<collection property="activitySignUps" ofType="java.util.Map">
+			<result column="asu_id" property="id" />
+			<result column="asu_name" property="name" />
+			<result column="asu_phone" property="phone" />
+		</collection>
+		<collection property="activityMemberLikes" ofType="java.util.Map">
+			<result column="aml_id" property="id" />
+			<result column="aml_phone" property="phone" />
+			<result column="aml_photo" property="logoPath" />
+		</collection>
+	</resultMap>
+	
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
 		id, status, title, summary, sponsorId, homePath, serialNumber, editor, FromTime, ToTime, address, detail, 
@@ -90,9 +137,11 @@
 		</if>
 	</select>
 	
-	<select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	<select id="queryById" parameterType="java.lang.Long" resultMap="mapBaseResult">
 		select 
 			a.*, 
+			asp.name asp_sponsor,
+			asp.logoPath asp_logoPath,
 			ap.id ap_id,
 			ap.activityId ap_activityId,
 			ap.price ap_price,
@@ -108,6 +157,7 @@
 			aml.phone AS aml_phone,
 			m.photo AS aml_photo
 		from t_activity a
+		inner join t_activity_sponsor asp on asp.id = a.sponsorId
 		inner join t_activity_package ap on ap.activityId = a.id
 		left join t_activity_sign_up asu on asu.activityId = a.id
 		left join t_activity_member_like aml on aml.activityId = a.id
