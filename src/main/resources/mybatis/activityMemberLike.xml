@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.mapper.ActivityMemberLikeMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.bean.ActivityMemberLike" >
+		<result column="id" property="id" />
+		<result column="activityId" property="activityId" />
+		<result column="phone" property="phone" />
+	</resultMap>
+
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, activityId, phone
+	</sql>
+	
+		<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_activity_member_like(activityId, phone)
+		values(#{activityId}, #{phone})
+	</insert>
+	
+	<delete id="deleteByPhone" parameterType="Object" >
+		DELETE aml FROM t_activity_member_like aml WHERE aml.activityId = #{activityId} AND aml.phone = #{phone}
+	</delete>
+</mapper>

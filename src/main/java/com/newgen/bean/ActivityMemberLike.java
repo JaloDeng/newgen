@@ -6,7 +6,7 @@ public class ActivityMemberLike {
 	
 	private Long activityId;
 	
-	private Integer memberId;
+	private String phone;
 
 	public Long getId() {
 		return id;
@@ -24,17 +24,17 @@ public class ActivityMemberLike {
 		this.activityId = activityId;
 	}
 
-	public Integer getMemberId() {
-		return memberId;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	@Override
 	public String toString() {
-		return "ActivityMemberLike [id=" + id + ", activityId=" + activityId + ", memberId=" + memberId + "]";
+		return "ActivityMemberLike [id=" + id + ", activityId=" + activityId + ", phone=" + phone + "]";
 	}
-	
+
 }

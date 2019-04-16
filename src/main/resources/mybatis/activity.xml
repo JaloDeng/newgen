@@ -42,8 +42,13 @@
 			<result column="asu_name" property="name" />
 			<result column="asu_phone" property="phone" />
 		</collection>
+		<collection property="activityMemberLikes" ofType="java.util.Map">
+			<result column="aml_id" property="id" />
+			<result column="aml_phone" property="phone" />
+			<result column="aml_photo" property="logoPath" />
+		</collection>
 	</resultMap>
-
+	
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
 		id, status, title, summary, sponsorId, homePath, serialNumber, editor, FromTime, ToTime, address, detail, 
@@ -73,7 +78,8 @@
 			IFNULL(a.homePath, '') AS homePath, 
 			case when COUNT(asp.id) &gt; 1 then CONCAT('¥', MIN(ap.price), '起') else if(ap.price = 0, '免费', CONCAT('¥', ap.price)) end AS price, 
 			a.serialNumber, 
-			a.clickCount, a.address
+			a.clickCount, 
+			a.address
 		from t_activity a
 		inner join t_activity_sponsor asp on asp.id = a.sponsorId
 		inner join t_activity_package ap on ap.activityId = a.id
@@ -97,10 +103,15 @@
 			ap.updateTime ap_updateTime,
 			asu.id AS asu_id,
 			asu.name AS asu_name,
-			asu.phone AS asu_phone
+			asu.phone AS asu_phone,
+			aml.id AS aml_id,
+			aml.phone AS aml_phone,
+			m.photo AS aml_photo
 		from t_activity a
 		inner join t_activity_package ap on ap.activityId = a.id
-		inner join t_activity_sign_up asu on asu.activityId = a.id
+		left join t_activity_sign_up asu on asu.activityId = a.id
+		left join t_activity_member_like aml on aml.activityId = a.id
+		left join t_member m on m.phonenumber = aml.phone
 		<where>
 		<if test="value != null and value > 0">
 			and a.id = #{value}

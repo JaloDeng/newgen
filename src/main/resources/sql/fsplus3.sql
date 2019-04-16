@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS `t_activity_member_like`;
 CREATE TABLE `t_activity_member_like` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `activityId` bigint(20) DEFAULT NULL COMMENT '活动表主键，t_activity.id',
-  `memberId` bigint(20) DEFAULT NULL COMMENT '会员表主键，t_member.id',
+  `phone` varchar(50) DEFAULT NULL COMMENT '会员手机号码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员收藏活动中间表';
 
