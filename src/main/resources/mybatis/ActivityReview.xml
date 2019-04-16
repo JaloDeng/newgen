@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.mapper.ActivityReviewMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.bean.ActivityReview" >
+		<result column="id" property="id" />
+		<result column="activitySignUpId" property="activitySignUpId" />
+		<result column="activityId" property="activityId" />
+		<result column="content" property="content" />
+		<result column="picture" property="picture" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+	</resultMap>
+	
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, activitySignUpId, activityId, content, picture, createTime, updateTime 
+	</sql>
+	
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_activity_review(activitySignUpId, activityId, content, picture, createTime, updateTime)
+		values(#{activitySignUpId}, #{activityId}, #{content}, #{picture}, #{createTime}, #{updateTime})
+	</insert>
+	
+	<select id="findList" parameterType="Object" resultType="java.util.Map">
+		select 
+			ar.*,
+			a.title AS a_activityTitle,
+			asu.phone AS asu_phone
+		from t_activity_review ar
+		inner join t_activity a on a.id = ar.activityId
+		inner join t_activity_sign_up asu on asu.id = ar.activitySignUpId
+		order by ar.createTime desc
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
+	</select>
+	
+	<select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select 
+			ar.*,
+			a.title AS a_activityTitle,
+			asu.phone AS asu_phone
+		from t_activity_review ar
+		inner join t_activity a on a.id = ar.activityId
+		inner join t_activity_sign_up asu on asu.id = ar.activitySignUpId
+		<where>
+		<if test="value != null and value > 0">
+			and ar.id = #{value}
+		</if>
+		</where>
+	</select>
+
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object">
+		update t_activity_review set content = #{content}, picture = #{picture}, updateTime = #{updateTime}
+		where id = #{id}
+	</update>
+
+</mapper>

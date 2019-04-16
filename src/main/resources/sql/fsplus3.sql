@@ -170,7 +170,20 @@ CREATE TABLE `t_activity_refund_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动退款记录表';
 
-
+-- ----------------------------------------------------------------------------------------------------------------------------------------
+-- 活动评价表
+-- ----------------------------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `t_activity_review`;
+CREATE TABLE `t_activity_review` (
+  `id` bigint(20) NOT NULL COMMENT '主键ID',
+  `activitySignUpId` bigint(20) DEFAULT NULL COMMENT '活动报名表主键，t_activity_sign_up.id',
+  `activityId` bigint(20) DEFAULT NULL COMMENT '活动表主键，t_activity.id',
+  `content` varchar(1000) DEFAULT NULL COMMENT '评论内容',
+  `picture` varchar(500) DEFAULT NULL COMMENT '图片路径',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动评价表';
 
 
 
