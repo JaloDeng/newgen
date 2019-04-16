@@ -15,6 +15,7 @@
 		<result column="channel" property="channel" />
 		<result column="name" property="name" />
 		<result column="phone" property="phone" />
+		<result column="IDCard" property="IDCard" />
 		<result column="signUpTime" property="signUpTime" />
 		<result column="cancelSignUpTime" property="cancelSignUpTime" />
 		<result column="remark" property="remark" />
@@ -26,7 +27,8 @@
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
 		id, activityId, memberId, activityPackageId, serialNumber, status, amount, 
-		channel, name, phone, signUpTime, cancelSignUpTime, remark, refundTime, createTime, updateTime
+		channel, name, phone, IDCard, signUpTime, cancelSignUpTime, remark, refundTime, 
+		createTime, updateTime
 	</sql>
 	
 	<!-- 查询条件 -->
@@ -45,9 +47,9 @@
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
 		insert into t_activity_sign_up(activityId, memberId, activityPackageId, serialNumber, amount, 
-			channel, name, phone, remark, createTime, updateTime)
+			channel, name, phone, IDCard, remark, createTime, updateTime)
 		values(#{activityId}, #{memberId}, #{activityPackageId}, #{serialNumber}, #{amount}, 
-			#{channel}, #{name}, #{phone}, #{remark}, #{createTime}, #{updateTime})
+			#{channel}, #{name}, #{phone}, #{IDCard}, #{remark}, #{createTime}, #{updateTime})
 	</insert>
 	
 	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
@@ -65,7 +67,7 @@
 	<!-- 根据id，修改记录-->  
 	<update id="update" parameterType="Object">
 		update t_activity_sign_up set activityPackageId = #{activityPackageId}, amount = #{amount}, 
-			name = #{name}, phone = #{phone}, remark = #{remark}, updateTime = #{updateTime}
+			name = #{name}, phone = #{phone}, IDCard = #{IDCard}, remark = #{remark}, updateTime = #{updateTime}
 		where id = #{id}
 	</update>
 

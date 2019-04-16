@@ -119,6 +119,7 @@ CREATE TABLE `t_activity_sign_up` (
   `channel` varchar(150) DEFAULT NULL COMMENT '报名渠道',
   `name` varchar(100) DEFAULT NULL COMMENT '姓名',
   `phone` varchar(50) DEFAULT NULL COMMENT '手机号码',
+  `IDCard` varchar(100) DEFAULT NULL COMMENT '身份证号码',
   `signUpTime` datetime DEFAULT NULL COMMENT '报名时间',
   `cancelSignUpTime` datetime DEFAULT NULL COMMENT '取消报名时间',
   `remark` varchar(1000) DEFAULT NULL COMMENT '备注',

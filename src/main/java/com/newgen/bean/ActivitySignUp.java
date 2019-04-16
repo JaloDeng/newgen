@@ -25,6 +25,8 @@ public class ActivitySignUp {
 	
 	private String phone;
 	
+	private String IDCard;
+	
 	private Date signUpTime;
 	
 	private Date cancelSignUpTime;
@@ -107,6 +109,14 @@ public class ActivitySignUp {
 		this.name = name;
 	}
 
+	public String getIDCard() {
+		return IDCard;
+	}
+
+	public void setIDCard(String IDCard) {
+		this.IDCard = IDCard;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -159,9 +169,9 @@ public class ActivitySignUp {
 	public String toString() {
 		return "ActivitySignUp [id=" + id + ", activityId=" + activityId + ", memberId=" + memberId
 				+ ", activityPackageId=" + activityPackageId + ", serialNumber=" + serialNumber + ", status=" + status
-				+ ", amount=" + amount + ", channel=" + channel + ", name=" + name + ", phone=" + phone
-				+ ", signUpTime=" + signUpTime + ", cancelSignUpTime=" + cancelSignUpTime + ", remark=" + remark
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ ", amount=" + amount + ", channel=" + channel + ", name=" + name + ", phone=" + phone + ", IDCard="
+				+ IDCard + ", signUpTime=" + signUpTime + ", cancelSignUpTime=" + cancelSignUpTime + ", remark="
+				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 
 }
