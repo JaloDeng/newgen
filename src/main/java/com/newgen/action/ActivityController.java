@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.newgen.bean.ActivityMemberLike;
+import com.newgen.bean.ActivityReview;
 import com.newgen.bean.ActivitySignUp;
 import com.newgen.service.ActivityMemberLikeService;
+import com.newgen.service.ActivityReviewService;
 import com.newgen.service.ActivityService;
 import com.newgen.service.ActivitySignUpService;
 import com.newgen.service.ActivitySponsorService;
@@ -41,6 +43,9 @@ public class ActivityController extends BaseController {
 	
 	@Autowired
 	private ActivityMemberLikeService activityMemberLikeService;
+	
+	@Autowired
+	private ActivityReviewService activityReviewService;
 	
 	@ApiOperation("根据ID获取活动详细信息")
 	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
@@ -70,6 +75,14 @@ public class ActivityController extends BaseController {
 		return result(1, null, activitySignUpService.queryById(id));
 	}
 	
+	@ApiOperation("获取活动报名信息列表")
+	@RequestMapping(value = { "/getActivitySignUpList" }, produces = { "application/json;charset=UTF-8" }, 
+	method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	public @ResponseBody Map<?, ?> getActivitySignUpList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return result(1, null, activitySignUpService.findList(params));
+	}
+	
 	@ApiOperation("获取活动主办方列表")
 	@RequestMapping(value = { "/getActivitySponsorList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
@@ -89,12 +102,20 @@ public class ActivityController extends BaseController {
 		return result(1, null, activitySponsorService.queryById(id));
 	}
 	
-	@ApiOperation("获取活动报名列表")
-	@RequestMapping(value = { "/getActivitySignUpList" }, produces = { "application/json;charset=UTF-8" }, 
+	@ApiOperation("获取活动评价列表")
+	@RequestMapping(value = { "/getActivityReviewList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Map<?, ?> getActivitySignUpList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Map<?, ?> getActivityReviewList(@RequestBody Map<String, Object> params, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return result(1, null, activityReviewService.findList(params));
+	}
+	
+	@ApiOperation("根据ID获取活动评价信息")
+	@RequestMapping(value = { "/getActivityReviewById" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	public @ResponseBody Map<?, ?> getActivityReviewById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return result(1, null, activitySignUpService.findList(params));
+		return result(1, null, activityReviewService.queryById(id));
 	}
 	
 	@ApiOperation("新增活动报名")
@@ -113,6 +134,22 @@ public class ActivityController extends BaseController {
 		activitySignUp.setUpdateTime(new Date());
 		activitySignUpService.add(activitySignUp);
 		return result(1, "报名成功", null);
+	}
+	
+	@ApiOperation("新增活动评价")
+	@RequestMapping(value = { "/addActivityReview" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	public @ResponseBody Map<?, ?> addActivityReview(@RequestBody ActivityReview activityReview, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (activityReview == null) {
+			return result(0, "数据为空，请确认数据是否齐全", null);
+		} else if (activityReview.getContent() == null) {
+			return result(0, "请输入评价内容", null);
+		}
+		activityReview.setCreateTime(new Date());
+		activityReview.setUpdateTime(new Date());
+		activityReviewService.add(activityReview);
+		return result(1, "评价成功", null);
 	}
 	
 	@ApiOperation("新增活动收藏")

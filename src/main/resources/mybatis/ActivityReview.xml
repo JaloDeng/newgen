@@ -28,8 +28,8 @@
 	<select id="findList" parameterType="Object" resultType="java.util.Map">
 		select 
 			ar.*,
-			a.title AS a_activityTitle,
-			asu.phone AS asu_phone
+			a.title AS activityTitle,
+			asu.phone AS phone
 		from t_activity_review ar
 		inner join t_activity a on a.id = ar.activityId
 		inner join t_activity_sign_up asu on asu.id = ar.activitySignUpId
