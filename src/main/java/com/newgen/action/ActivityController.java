@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,14 +43,16 @@ public class ActivityController extends BaseController {
 	private ActivityMemberLikeService activityMemberLikeService;
 	
 	@ApiOperation("根据ID获取活动详细信息")
-	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return result(1, null, activityService.queryById(id));
 	}
 	
 	@ApiOperation("获取活动列表")
-	@RequestMapping(value = { "/getActivityList" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/getActivityList" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> getActivityList(@RequestParam(required = false) @ApiParam("页码") Integer page,
 			@RequestParam(required = false) @ApiParam("行数") Integer row, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -60,14 +63,16 @@ public class ActivityController extends BaseController {
 	}
 	
 	@ApiOperation("根据ID获取报名信息")
-	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return result(1, null, activitySignUpService.queryById(id));
 	}
 	
 	@ApiOperation("获取活动主办方列表")
-	@RequestMapping(value = { "/getActivitySponsorList" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/getActivitySponsorList" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> getActivitySponsorList(@RequestParam(required = false) @ApiParam("页码") Integer page,
 			@RequestParam(required = false) @ApiParam("行数") Integer row, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -77,14 +82,24 @@ public class ActivityController extends BaseController {
 	}
 	
 	@ApiOperation("根据ID获取活动主办方信息")
-	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return result(1, null, activitySponsorService.queryById(id));
 	}
 	
+	@ApiOperation("获取活动报名列表")
+	@RequestMapping(value = { "/getActivitySignUpList" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	public @ResponseBody Map<?, ?> getActivitySignUpList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return result(1, null, activitySignUpService.findList(params));
+	}
+	
 	@ApiOperation("新增活动报名")
-	@RequestMapping(value = { "/activitySignUp" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/activitySignUp" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> activitySignUp(@RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if (activitySignUp == null) {
@@ -101,7 +116,8 @@ public class ActivityController extends BaseController {
 	}
 	
 	@ApiOperation("新增活动收藏")
-	@RequestMapping(value = { "/activityMemberLike" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/activityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> activityMemberLike(@RequestBody ActivityMemberLike activityMemberLike, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if (activityMemberLike == null) {
@@ -114,7 +130,8 @@ public class ActivityController extends BaseController {
 	}
 	
 	@ApiOperation("取消活动收藏")
-	@RequestMapping(value = { "/cancelActivityMemberLike" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = { "/cancelActivityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 	public @ResponseBody Map<?, ?> cancelActivityMemberLike(@RequestBody ActivityMemberLike activityMemberLike,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (activityMemberLike == null) {

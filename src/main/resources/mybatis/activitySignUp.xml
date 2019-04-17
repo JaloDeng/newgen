@@ -23,7 +23,7 @@
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
 	</resultMap>
-
+	
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
 		id, activityId, memberId, activityPackageId, serialNumber, status, amount, 
@@ -41,6 +41,15 @@
 		<if test="activityId != null" >
 		    and activityId = #{activityId}
 		</if>
+		<if test="phone != null" >
+		    and phone = #{phone}
+		</if>
+		<if test="status != null" >
+		    and status = #{status}
+		</if>
+		<if test="channel != null" >
+		    and channel = #{channel}
+		</if>
 		</trim>
 	</sql>
 
@@ -53,9 +62,18 @@
 	</insert>
 	
 	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> 
-		from t_activity_sign_up 
+		select
+			asu.*,
+			a.title AS activityTitle,
+			ap.title AS activityPackageTitle,
+			ap.price AS activityPackagePrice
+		from t_activity_sign_up asu
+		inner join t_activity a on a.id = asu.activityId
+		inner join t_activity_package ap on ap.id = asu.activityPackageId
 		<include refid="Example_Where_Clause"/>
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
 	</select>
 	
 	<select id="queryById" parameterType="Object" resultMap="BaseResultMap">

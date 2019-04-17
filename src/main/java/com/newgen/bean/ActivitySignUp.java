@@ -36,7 +36,14 @@ public class ActivitySignUp {
 	private Date createTime;
 	
 	private Date updateTime;
-
+	
+	//表t_activity字段，非本表字段
+	private String activityTitle;
+	
+	//表t_activity_package字段，非本表字段
+	private String activityPackageTitle;
+	private BigDecimal activityPackagePrice;
+	
 	public Long getId() {
 		return id;
 	}
@@ -165,13 +172,39 @@ public class ActivitySignUp {
 		this.updateTime = updateTime;
 	}
 
+	public String getActivityTitle() {
+		return activityTitle;
+	}
+
+	public void setActivityTitle(String activityTitle) {
+		this.activityTitle = activityTitle;
+	}
+
+	public String getActivityPackageTitle() {
+		return activityPackageTitle;
+	}
+
+	public void setActivityPackageTitle(String activityPackageTitle) {
+		this.activityPackageTitle = activityPackageTitle;
+	}
+
+	public BigDecimal getActivityPackagePrice() {
+		return activityPackagePrice;
+	}
+
+	public void setActivityPackagePrice(BigDecimal activityPackagePrice) {
+		this.activityPackagePrice = activityPackagePrice;
+	}
+
 	@Override
 	public String toString() {
 		return "ActivitySignUp [id=" + id + ", activityId=" + activityId + ", memberId=" + memberId
 				+ ", activityPackageId=" + activityPackageId + ", serialNumber=" + serialNumber + ", status=" + status
 				+ ", amount=" + amount + ", channel=" + channel + ", name=" + name + ", phone=" + phone + ", IDCard="
 				+ IDCard + ", signUpTime=" + signUpTime + ", cancelSignUpTime=" + cancelSignUpTime + ", remark="
-				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + ", activityTitle="
+				+ activityTitle + ", activityPackageTitle=" + activityPackageTitle + ", activityPackagePrice="
+				+ activityPackagePrice + "]";
 	}
 
 }
