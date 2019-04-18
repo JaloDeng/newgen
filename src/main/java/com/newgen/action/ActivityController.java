@@ -27,6 +27,7 @@ import com.newgen.service.ActivityReviewService;
 import com.newgen.service.ActivityService;
 import com.newgen.service.ActivitySignUpService;
 import com.newgen.service.ActivitySponsorService;
+import com.newgen.util.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -128,12 +129,12 @@ public class ActivityController extends BaseController {
 	@ApiOperation("新增活动报名")
 	@RequestMapping(value = { "/activitySignUp" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Map<?, ?> activitySignUp(@Valid @RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activitySignUp(@Valid @RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ObjectMapper om = new ObjectMapper();
 		if (activitySignUpService.count(om.convertValue(activitySignUp, Map.class)) > 0) {
 			LOGGER.info(String.format("报名失败，不能重复报名 :  activityId=[%d], phone=[%s]", activitySignUp.getActivityId(), activitySignUp.getPhone()));
-			return result(0, "报名失败，不能重复报名", null);
+			return new Result(0, "报名失败，不能重复报名", null);
 		}
 		
 		activitySignUp.setStatus(0);
@@ -141,7 +142,7 @@ public class ActivityController extends BaseController {
 		activitySignUp.setCreateTime(new Date());
 		activitySignUp.setUpdateTime(new Date());
 		activitySignUpService.add(activitySignUp);
-		return result(1, "报名成功", null);
+		return new Result(1, "报名成功", null);
 	}
 	
 	@ApiOperation("新增活动评价")

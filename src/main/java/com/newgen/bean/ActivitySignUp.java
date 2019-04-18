@@ -36,7 +36,7 @@ public class ActivitySignUp {
 	@Pattern(regexp = "^\\d{11,11}$", message = "请输入正确的手机号码")
 	private String phone;
 	
-	@NotBlank(message = "身份自号码不能为空")
+	@NotBlank(message = "身份证号码不能为空")
 	private String IDCard;
 	
 	private Date signUpTime;
