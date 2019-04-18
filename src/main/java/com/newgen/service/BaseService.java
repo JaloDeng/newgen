@@ -51,7 +51,7 @@ public abstract class BaseService<T> {
 	}
 	
 	public int count(Map<String, Object> var1)  throws Exception {
-		return findList(var1).size();
+		return this.getMapper().count(var1);
 	}
 	
 	private void ifPaging(Map<String, Object> var1) {
