@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -33,10 +33,10 @@ public class ActivitySignUp {
 	@NotBlank(message = "姓名不能为空")
 	private String name;
 	
-	@Size(min = 11, max = 11, message = "请输入正确的手机号码")
+	@Pattern(regexp = "^\\d{11,11}$", message = "请输入正确的手机号码")
 	private String phone;
 	
-	//@NotBlank(message = "身份自号码不能为空")
+	@NotBlank(message = "身份自号码不能为空")
 	private String IDCard;
 	
 	private Date signUpTime;
