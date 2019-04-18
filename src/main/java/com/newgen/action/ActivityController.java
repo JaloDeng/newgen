@@ -6,7 +6,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newgen.bean.ActivityMemberLike;
 import com.newgen.bean.ActivityReview;
 import com.newgen.bean.ActivitySignUp;
@@ -31,6 +35,8 @@ import io.swagger.annotations.ApiParam;
 @Controller
 @Api(value = "ActivityController", tags = {"活动模块"})
 public class ActivityController extends BaseController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 
 	@Autowired
 	private ActivityService activityService;
@@ -118,16 +124,18 @@ public class ActivityController extends BaseController {
 		return result(1, null, activityReviewService.queryById(id));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation("新增活动报名")
-	@RequestMapping(value = { "/activitySignUp" }, produces = { "application/json;charset=UTF-8" }, 
+	@RequestMapping(value = { "/activitySignUp" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Map<?, ?> activitySignUp(@RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Map<?, ?> activitySignUp(@Valid @RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		if (activitySignUp == null) {
-			return result(0, "数据为空，请确认报名信息是否齐全", null);
-		} else if (activitySignUp.getPhone() == null) {
-			return result(0, "请输入手机号码", null);
+		ObjectMapper om = new ObjectMapper();
+		if (activitySignUpService.count(om.convertValue(activitySignUp, Map.class)) > 0) {
+			LOGGER.info(String.format("报名失败，不能重复报名 :  activityId=[%d], phone=[%s]", activitySignUp.getActivityId(), activitySignUp.getPhone()));
+			return result(0, "报名失败，不能重复报名", null);
 		}
+		
 		activitySignUp.setStatus(0);
 		activitySignUp.setSignUpTime(new Date());
 		activitySignUp.setCreateTime(new Date());

@@ -3,14 +3,23 @@ package com.newgen.bean;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivitySignUp {
 
 	private Long id;
 	
+	@NotNull(message = "活动ID不能为空")
 	private Long activityId;
 	
 	private Integer memberId;
 	
+	@NotNull(message = "活动套餐ID不能为空")
 	private Long activityPackageId;
 	
 	private String serialNumber;
@@ -21,10 +30,13 @@ public class ActivitySignUp {
 	
 	private String channel;
 	
+	@NotBlank(message = "姓名不能为空")
 	private String name;
 	
+	@Size(min = 11, max = 11, message = "请输入正确的手机号码")
 	private String phone;
 	
+	//@NotBlank(message = "身份自号码不能为空")
 	private String IDCard;
 	
 	private Date signUpTime;
@@ -37,12 +49,7 @@ public class ActivitySignUp {
 	
 	private Date updateTime;
 	
-	//表t_activity字段，非本表字段
-	private String activityTitle;
-	
-	//表t_activity_package字段，非本表字段
-	private String activityPackageTitle;
-	private BigDecimal activityPackagePrice;
+	private Activity activity;
 	
 	public Long getId() {
 		return id;
@@ -172,28 +179,12 @@ public class ActivitySignUp {
 		this.updateTime = updateTime;
 	}
 
-	public String getActivityTitle() {
-		return activityTitle;
+	public Activity getActivity() {
+		return activity;
 	}
 
-	public void setActivityTitle(String activityTitle) {
-		this.activityTitle = activityTitle;
-	}
-
-	public String getActivityPackageTitle() {
-		return activityPackageTitle;
-	}
-
-	public void setActivityPackageTitle(String activityPackageTitle) {
-		this.activityPackageTitle = activityPackageTitle;
-	}
-
-	public BigDecimal getActivityPackagePrice() {
-		return activityPackagePrice;
-	}
-
-	public void setActivityPackagePrice(BigDecimal activityPackagePrice) {
-		this.activityPackagePrice = activityPackagePrice;
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 
 	@Override
@@ -202,9 +193,7 @@ public class ActivitySignUp {
 				+ ", activityPackageId=" + activityPackageId + ", serialNumber=" + serialNumber + ", status=" + status
 				+ ", amount=" + amount + ", channel=" + channel + ", name=" + name + ", phone=" + phone + ", IDCard="
 				+ IDCard + ", signUpTime=" + signUpTime + ", cancelSignUpTime=" + cancelSignUpTime + ", remark="
-				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + ", activityTitle="
-				+ activityTitle + ", activityPackageTitle=" + activityPackageTitle + ", activityPackagePrice="
-				+ activityPackagePrice + "]";
+				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + ", activity=" + activity + "]";
 	}
 
 }

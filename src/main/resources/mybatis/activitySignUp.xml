@@ -22,6 +22,28 @@
 		<result column="refundTime" property="refundTime" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
+		<association property="activity" javaType="com.newgen.bean.Activity">
+			<result column="a_id" property="id" />
+			<result column="a_status" property="status" />
+			<result column="a_title" property="title" />
+			<result column="a_summary" property="summary" />
+			<result column="a_sponsorId" property="sponsorId" />
+			<result column="a_homePath" property="homePath" />
+			<result column="a_serialNumber" property="serialNumber" />
+			<result column="a_editor" property="editor" />
+			<result column="a_fromTime" property="fromTime" />
+			<result column="a_toTime" property="toTime" />
+			<result column="a_address" property="address" />
+			<result column="a_detail" property="detail" />
+			<result column="a_expenseExplanation" property="expenseExplanation" />
+			<result column="a_refundExplanation" property="refundExplanation" />
+			<result column="a_notice" property="notice" />
+			<result column="a_clickCount" property="clickCount" />
+			<result column="a_likeCount" property="likeCount" />
+			<result column="a_shareCount" property="shareCount" />
+			<result column="a_remark" property="remark" />
+			<result column="a_releaseTime" property="releaseTime" />
+		</association>
 	</resultMap>
 	
 	<!-- sys_user table all fields -->
@@ -64,7 +86,26 @@
 	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
 		select
 			asu.*,
-			a.title AS activityTitle,
+			a.id a_id,
+			a.status a_status,
+			a.title a_title,
+			a.summary a_summary,
+			a.sponsorId a_sponsorId,
+			a.homePath a_homePath,
+			a.serialNumber a_serialNumber,
+			a.editor a_editor,
+			a.fromTime a_fromTime,
+			a.toTime a_toTime,
+			a.address a_address,
+			a.detail a_detail,
+			a.expenseExplanation a_expenseExplanation,
+			a.refundExplanation a_refundExplanation,
+			a.notice a_notice,
+			a.clickCount a_clickCount,
+			a.likeCount a_likeCount,
+			a.shareCount a_shareCount,
+			a.remark a_remark,
+			a.releaseTime a_releaseTime,
 			ap.title AS activityPackageTitle,
 			ap.price AS activityPackagePrice
 		from t_activity_sign_up asu
@@ -80,6 +121,11 @@
 		select <include refid="Base_Column_List" /> 
 		from t_activity_sign_up
 		where id = #{value}
+	</select>
+	
+	<select id="count" parameterType="Object" resultType="java.lang.Integer">
+		select count(1) from t_activity_sign_up
+		<include refid="Example_Where_Clause"/>
 	</select>
 
 	<!-- 根据id，修改记录-->  
