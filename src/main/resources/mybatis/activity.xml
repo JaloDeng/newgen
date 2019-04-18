@@ -152,9 +152,9 @@
 			ap.updateTime ap_updateTime,
 			asu.id AS asu_id,
 			asu.name AS asu_name,
-			asu.phone AS asu_phone,
+			REPLACE(asu.phone, SUBSTR(asu.phone, 4, 4), '****') AS asu_phone,
 			aml.id AS aml_id,
-			aml.phone AS aml_phone,
+			REPLACE(aml.phone, SUBSTR(aml.phone, 4, 4), '****') AS aml_phone,
 			m.photo AS aml_photo
 		from t_activity a
 		inner join t_activity_sponsor asp on asp.id = a.sponsorId
