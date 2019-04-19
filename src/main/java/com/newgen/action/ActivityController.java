@@ -54,7 +54,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("根据ID获取活动详细信息")
 	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityService.queryById(id));
@@ -62,7 +62,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("获取活动列表")
 	@RequestMapping(value = { "/getActivityList" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivityList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityService.findList(params));
@@ -70,7 +70,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("根据ID获取报名信息")
 	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySignUpService.queryById(id));
@@ -78,7 +78,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("获取活动报名信息列表")
 	@RequestMapping(value = { "/getActivitySignUpList" }, produces = { "application/json;charset=UTF-8" }, 
-	method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivitySignUpList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySignUpService.findList(params));
@@ -86,14 +86,14 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("获取活动主办方列表")
 	@RequestMapping(value = { "/getActivitySponsorList" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivitySponsorList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new Result(1, null, activitySponsorService.findList(params));
 	}
 	
 	@ApiOperation("根据ID获取活动主办方信息")
 	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySponsorService.queryById(id));
@@ -101,7 +101,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("获取活动评价列表")
 	@RequestMapping(value = { "/getActivityReviewList" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivityReviewList(@RequestBody Map<String, Object> params, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new Result(1, null, activityReviewService.findList(params));
@@ -109,7 +109,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("根据ID获取活动评价信息")
 	@RequestMapping(value = { "/getActivityReviewById" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivityReviewById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityReviewService.queryById(id));
@@ -118,7 +118,7 @@ public class ActivityController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@ApiOperation("新增活动报名")
 	@RequestMapping(value = { "/activitySignUp" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result activitySignUp(@Valid @RequestBody ActivitySignUp activitySignUp, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ObjectMapper om = new ObjectMapper();
@@ -137,7 +137,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("新增活动评价")
 	@RequestMapping(value = { "/addActivityReview" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result addActivityReview(@Valid @RequestBody ActivityReview activityReview, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		activityReview.setCreateTime(new Date());
@@ -148,7 +148,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("新增活动收藏")
 	@RequestMapping(value = { "/activityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result activityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		activityMemberLikeService.add(activityMemberLike);
@@ -157,7 +157,7 @@ public class ActivityController extends BaseController {
 	
 	@ApiOperation("取消活动收藏")
 	@RequestMapping(value = { "/cancelActivityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+			method = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result cancelActivityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		activityMemberLikeService.deleteByPhone(activityMemberLike);
