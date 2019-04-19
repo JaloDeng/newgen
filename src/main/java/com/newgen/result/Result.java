@@ -1,4 +1,4 @@
-package com.newgen.util;
+package com.newgen.result;
 
 public class Result {
 
