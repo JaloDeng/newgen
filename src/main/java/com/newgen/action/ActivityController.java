@@ -141,32 +141,51 @@ public class ActivityController extends BaseController {
 		return new Result(1, "报名成功", null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation("新增活动评价")
 	@RequestMapping(value = { "/addActivityReview" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result addActivityReview(@Valid @RequestBody ActivityReview activityReview, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public @ResponseBody Result addActivityReview(@Valid @RequestBody ActivityReview activityReview,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ObjectMapper om = new ObjectMapper();
+		if (activityReviewService.count(om.convertValue(activityReview, Map.class)) > 0) {
+			LOGGER.info(String.format("评价失败，不能重复评价 :  activityId=[%d], getActivitySignUpId=[%s]",
+					activityReview.getActivityId(), activityReview.getActivitySignUpId()));
+			return new Result(0, "评价失败，不能重复评价", null);
+		}
+
 		activityReview.setCreateTime(new Date());
 		activityReview.setUpdateTime(new Date());
 		activityReviewService.add(activityReview);
 		return new Result(1, "评价成功", null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation("新增活动收藏")
 	@RequestMapping(value = { "/activityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result activityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		ObjectMapper om = new ObjectMapper();
+		if (activityMemberLikeService.count(om.convertValue(activityMemberLike, Map.class)) > 0 ) {
+			LOGGER.info(String.format("收藏失败，不能重复收藏 :  activityId=[%d], phone=[%s]", activityMemberLike.getActivityId(), activityMemberLike.getPhone()));
+			return new Result(0, "收藏失败，不能重复收藏", null);
+		}
+		
 		activityMemberLikeService.add(activityMemberLike);
 		return new Result(1, "收藏成功", null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation("取消活动收藏")
 	@RequestMapping(value = { "/cancelActivityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result cancelActivityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		activityMemberLikeService.deleteByPhone(activityMemberLike);
+		ObjectMapper om = new ObjectMapper();
+		if (activityMemberLikeService.count(om.convertValue(activityMemberLike, Map.class)) > 0 ) {
+			activityMemberLikeService.deleteByPhone(activityMemberLike);
+		}
 		return new Result(1, "取消收藏成功", null);
 	}
 }

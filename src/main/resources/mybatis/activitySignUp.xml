@@ -63,13 +63,13 @@
 		<if test="activityId != null" >
 		    and activityId = #{activityId}
 		</if>
-		<if test="phone != null" >
+		<if test="phone != null and phone != ''" >
 		    and phone = #{phone}
 		</if>
 		<if test="status != null" >
 		    and status = #{status}
 		</if>
-		<if test="channel != null" >
+		<if test="channel != null and channel != ''" >
 		    and channel = #{channel}
 		</if>
 		</trim>

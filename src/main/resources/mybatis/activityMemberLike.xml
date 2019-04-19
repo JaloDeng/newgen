@@ -15,7 +15,23 @@
 		id, activityId, phone
 	</sql>
 	
-		<!-- 插入记录 -->
+	<!-- 查询条件 -->
+	<sql id="Example_Where_Clause">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="id != null" >
+		    and id = #{id}
+		</if>
+		<if test="activityId != null" >
+		    and activityId = #{activityId}
+		</if>
+		<if test="phone != null and phone != ''" >
+		    and phone = #{phone}
+		</if>
+		</trim>
+	</sql>
+	
+	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
 		insert into t_activity_member_like(activityId, phone)
 		values(#{activityId}, #{phone})
@@ -24,4 +40,10 @@
 	<delete id="deleteByPhone" parameterType="Object" >
 		DELETE aml FROM t_activity_member_like aml WHERE aml.activityId = #{activityId} AND aml.phone = #{phone}
 	</delete>
+	
+	<select id="count" parameterType="Object" resultType="java.lang.Integer">
+		select count(1) from t_activity_member_like
+		<include refid="Example_Where_Clause"/>
+	</select>
+	
 </mapper>
