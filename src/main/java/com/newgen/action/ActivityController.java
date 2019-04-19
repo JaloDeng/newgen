@@ -31,6 +31,12 @@ import com.newgen.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @Controller
 @Api(value = "ActivityController", tags = {"活动模块"})
 public class ActivityController extends BaseController {

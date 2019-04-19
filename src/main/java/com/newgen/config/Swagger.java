@@ -10,6 +10,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @Configuration
 @EnableSwagger2
 public class Swagger {

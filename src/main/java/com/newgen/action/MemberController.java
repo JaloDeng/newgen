@@ -14,6 +14,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @Controller
 @Api(value = "MemberController", tags = {"会员模块"})
 public class MemberController extends BaseController {

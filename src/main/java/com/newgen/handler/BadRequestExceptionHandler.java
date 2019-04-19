@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.newgen.result.Result;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @RestControllerAdvice
 public class BadRequestExceptionHandler {
 

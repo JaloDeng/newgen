@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import com.newgen.mapper.BaseMapper;
 import com.newgen.mapper.MemberPointsMapper;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @Service
 public class MemberPointsService<T> extends BaseService<T> {
 

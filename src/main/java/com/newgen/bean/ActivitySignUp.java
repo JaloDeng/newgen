@@ -9,6 +9,12 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author Jalo Deng
+ * @email 651379728@qq.com
+ * @time 2019年4月19日 上午10:38:59
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivitySignUp {
 
