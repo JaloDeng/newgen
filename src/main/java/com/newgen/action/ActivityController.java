@@ -148,13 +148,8 @@ public class ActivityController extends BaseController {
 	@ApiOperation("新增活动评价")
 	@RequestMapping(value = { "/addActivityReview" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Result addActivityReview(@RequestBody ActivityReview activityReview, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result addActivityReview(@Valid @RequestBody ActivityReview activityReview, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		if (activityReview == null) {
-			return new Result(0, "数据为空，请确认数据是否齐全", null);
-		} else if (activityReview.getContent() == null) {
-			return new Result(0, "请输入评价内容", null);
-		}
 		activityReview.setCreateTime(new Date());
 		activityReview.setUpdateTime(new Date());
 		activityReviewService.add(activityReview);
@@ -164,13 +159,8 @@ public class ActivityController extends BaseController {
 	@ApiOperation("新增活动收藏")
 	@RequestMapping(value = { "/activityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Result activityMemberLike(@RequestBody ActivityMemberLike activityMemberLike, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		if (activityMemberLike == null) {
-			return new Result(0, "数据为空，请用户信息是否为空", null);
-		} else if (activityMemberLike.getPhone() == null) {
-			return new Result(0, "请确认用户手机号码", null);
-		}
 		activityMemberLikeService.add(activityMemberLike);
 		return new Result(1, "收藏成功", null);
 	}
@@ -178,13 +168,8 @@ public class ActivityController extends BaseController {
 	@ApiOperation("取消活动收藏")
 	@RequestMapping(value = { "/cancelActivityMemberLike" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Result cancelActivityMemberLike(@RequestBody ActivityMemberLike activityMemberLike,
+	public @ResponseBody Result cancelActivityMemberLike(@Valid @RequestBody ActivityMemberLike activityMemberLike,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (activityMemberLike == null) {
-			return new Result(0, "数据为空，请用户信息是否为空", null);
-		} else if (activityMemberLike.getPhone() == null) {
-			return new Result(0, "请确认用户手机号码", null);
-		}
 		activityMemberLikeService.deleteByPhone(activityMemberLike);
 		return new Result(1, "取消收藏成功", null);
 	}

@@ -1,11 +1,16 @@
 package com.newgen.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class ActivityMemberLike {
 
 	private Long id;
 	
+	@NotNull(message = "活动ID不能为空")
 	private Long activityId;
 	
+	@Pattern(regexp = "^\\d{11,11}$", message = "请输入正确的手机号码")
 	private String phone;
 
 	public Long getId() {

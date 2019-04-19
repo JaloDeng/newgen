@@ -2,14 +2,19 @@ package com.newgen.bean;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class ActivityReview {
 
 	private Long id;
 	
+	@NotNull(message = "活动报名ID不能为空")
 	private Integer activitySignUpId;
 	
+	@NotNull(message = "活动ID不能为空")
 	private Integer activityId;
 	
+	@NotNull(message = "评价内容不能为空")
 	private String content;
 	
 	private String picture;
