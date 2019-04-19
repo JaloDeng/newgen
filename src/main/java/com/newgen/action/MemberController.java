@@ -1,13 +1,12 @@
 package com.newgen.action;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.newgen.result.Result;
 import com.newgen.util.Constant.MemberPointsType;
 
 import io.swagger.annotations.Api;
@@ -21,18 +20,18 @@ public class MemberController extends BaseController {
 
 	@ApiOperation("根据会员id获取会员积分")
 	@GetMapping(value = {"/getMemberPointsByMemberId"}, produces = {"application/json;charset=UTF-8"})
-	public @ResponseBody Map<?, ?> getMemberPointsByMemberId(@RequestParam(required = true) @ApiParam(value = "会员id", required = true, type = "Integer") Integer memberId) {
-		return result(1, null, memberPointsService.findByMemberId(memberId));
+	public @ResponseBody Result getMemberPointsByMemberId(@RequestParam(required = true) @ApiParam(value = "会员id", required = true, type = "Integer") Integer memberId) {
+		return new Result(1, null, memberPointsService.findByMemberId(memberId));
 	}
 	
 	@ApiOperation("会员签到")
 	@ApiImplicitParam(name = "memberId", value = "会员id")
 	@PostMapping(value = {"/memberSignIn"}, produces = {"application/json;charset=UTF-8"})
-	public @ResponseBody Map<?, ?> memberSignIn(@RequestParam(required = true) Integer memberId) throws Exception {
+	public @ResponseBody Result memberSignIn(@RequestParam(required = true) Integer memberId) throws Exception {
 		if (increaseMemberPoints(memberId, MemberPointsType.SIGNIN)) {
-			return result(1, "签到成功", null);
+			return new Result(1, "签到成功", null);
 		}
-		return result(0, "已签到", null);
+		return new Result(0, "已签到", null);
 	}
 	
 }

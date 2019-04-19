@@ -22,24 +22,6 @@ public class BaseController {
 	@Autowired
 	private MemberPointsLogService<MemberPointsLog> memberPointsLogService;
 
-	@SuppressWarnings("rawtypes")
-	private Map result = new HashMap();
-	
-	/**
-	 * 返回结果集
-	 * @param ret 1:成功，0：失败/已存在
-	 * @param msg 信息
-	 * @param data 数据
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected Map<?, ?> result(Integer ret, String msg, Object data) {
-		this.result.put("ret", ret);
-		this.result.put("msg", msg);
-		this.result.put("data", data);
-		return result;
-	}
-	
 	/**
 	 * 添加积分处理
 	 * @param memberId 会员表主键

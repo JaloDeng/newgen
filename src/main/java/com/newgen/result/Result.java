@@ -8,6 +8,12 @@ public class Result {
 	
 	private Object data;
 
+	/**
+	 * 返回结果集
+	 * @param ret 1:成功，0：失败/已存在
+	 * @param msg 信息
+	 * @param data 数据
+	 */
 	public Result(Integer ret, String msg, Object data) {
 		this.ret = ret;
 		this.msg = msg;

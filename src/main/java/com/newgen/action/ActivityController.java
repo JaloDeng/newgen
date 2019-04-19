@@ -1,7 +1,6 @@
 package com.newgen.action;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,6 @@ import com.newgen.result.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 @Controller
 @Api(value = "ActivityController", tags = {"活动模块"})
@@ -65,12 +63,8 @@ public class ActivityController extends BaseController {
 	@ApiOperation("获取活动列表")
 	@RequestMapping(value = { "/getActivityList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Result getActivityList(@RequestParam(required = false) @ApiParam("页码") Integer page,
-			@RequestParam(required = false) @ApiParam("行数") Integer row, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("page", page);
-		params.put("row", row);
 		return new Result(1, null, activityService.findList(params));
 	}
 	
@@ -93,11 +87,7 @@ public class ActivityController extends BaseController {
 	@ApiOperation("获取活动主办方列表")
 	@RequestMapping(value = { "/getActivitySponsorList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Result getActivitySponsorList(@RequestParam(required = false) @ApiParam("页码") Integer page,
-			@RequestParam(required = false) @ApiParam("行数") Integer row, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("page", page);
-		params.put("row", row);
+	public @ResponseBody Result getActivitySponsorList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new Result(1, null, activitySponsorService.findList(params));
 	}
 	
@@ -112,9 +102,9 @@ public class ActivityController extends BaseController {
 	@ApiOperation("获取活动评价列表")
 	@RequestMapping(value = { "/getActivityReviewList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public @ResponseBody Map<?, ?> getActivityReviewList(@RequestBody Map<String, Object> params, 
+	public @ResponseBody Result getActivityReviewList(@RequestBody Map<String, Object> params, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return result(1, null, activityReviewService.findList(params));
+		return new Result(1, null, activityReviewService.findList(params));
 	}
 	
 	@ApiOperation("根据ID获取活动评价信息")
