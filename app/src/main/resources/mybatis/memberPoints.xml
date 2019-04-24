@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.newgen.activity.app.mapper.MemberPointsMapper" >
+<mapper namespace="com.newgen.app.mapper.MemberPointsMapper" >
 
 	<!-- Result Map-->
-	<resultMap id="BaseResultMap" type="com.newgen.activity.app.bean.MemberPoints" >
+	<resultMap id="BaseResultMap" type="com.newgen.app.bean.MemberPoints" >
 		<result column="memberId" property="memberId" />
 		<result column="points" property="points" />
 		<result column="createTime" property="createTime" />

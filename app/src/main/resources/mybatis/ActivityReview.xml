@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.newgen.activity.app.mapper.ActivityReviewMapper" >
+<mapper namespace="com.newgen.app.mapper.ActivityReviewMapper" >
 
 	<!-- Result Map-->
-	<resultMap id="BaseResultMap" type="com.newgen.activity.app.bean.ActivityReview" >
+	<resultMap id="BaseResultMap" type="com.newgen.app.bean.ActivityReview" >
 		<result column="id" property="id" />
 		<result column="activitySignUpId" property="activitySignUpId" />
 		<result column="activityId" property="activityId" />

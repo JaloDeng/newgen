@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.newgen.activity.app.mapper.ActivityMapper" >
+<mapper namespace="com.newgen.app.mapper.ActivityMapper" >
 
 	<!-- Result Map-->
-	<resultMap id="BaseResultMap" type="com.newgen.activity.app.bean.Activity" >
+	<resultMap id="BaseResultMap" type="com.newgen.app.bean.Activity" >
 		<result column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="title" property="title" />
@@ -27,7 +27,7 @@
 		<result column="releaseTime" property="releaseTime" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
-		<collection property="activityPackages" ofType="com.newgen.activity.app.bean.ActivityPackage">
+		<collection property="activityPackages" ofType="com.newgen.app.bean.ActivityPackage">
 			<result column="ap_id" property="id" />
 			<result column="ap_activityId" property="activityId" />
 			<result column="ap_price" property="price" />
@@ -49,7 +49,7 @@
 		</collection>
 	</resultMap>
 	
-	<resultMap id="mapBaseResult" type="com.newgen.activity.app.bean.Activity" >
+	<resultMap id="mapBaseResult" type="com.newgen.app.bean.Activity" >
 		<result column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="title" property="title" />
@@ -74,7 +74,7 @@
 		<result column="releaseTime" property="releaseTime" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
-		<collection property="activityPackages" ofType="com.newgen.activity.app.bean.ActivityPackage">
+		<collection property="activityPackages" ofType="com.newgen.app.bean.ActivityPackage">
 			<result column="ap_id" property="id" />
 			<result column="ap_activityId" property="activityId" />
 			<result column="ap_price" property="price" />
