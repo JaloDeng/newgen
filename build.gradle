@@ -19,11 +19,10 @@ allprojects {
 
 subprojects {
 	apply plugin: 'eclipse'
-	apply plugin: 'java'
 	apply plugin: 'idea'
 	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java'
 	apply plugin: 'maven'
-	apply plugin: 'org.springframework.boot'
 
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
@@ -40,14 +39,10 @@ subprojects {
 		
 		implementation 'net.sf.json-lib:json-lib:2.2.3:jdk15'
 
-		implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
-		
-		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		
-		runtimeOnly 'mysql:mysql-connector-java'
-		runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
 	}
+	
+	tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"  
+	} 
 }
