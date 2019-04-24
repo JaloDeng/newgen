@@ -1,9 +1,12 @@
 .gradle
 /build/
+build
 !gradle/wrapper/gradle-wrapper.jar
+*.jar
 
 ### Eclipse ###
 bin
+classes
 
 ### STS ###
 .apt_generated
