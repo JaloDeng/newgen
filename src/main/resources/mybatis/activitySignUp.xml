@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.newgen.mapper.ActivitySignUpMapper" >
+<mapper namespace="com.newgen.activity.app.mapper.ActivitySignUpMapper" >
 
 	<!-- Result Map-->
-	<resultMap id="BaseResultMap" type="com.newgen.bean.ActivitySignUp" >
+	<resultMap id="BaseResultMap" type="com.newgen.activity.app.bean.ActivitySignUp" >
 		<result column="id" property="id" />
 		<result column="activityId" property="activityId" />
 		<result column="memberId" property="memberId" />
@@ -22,7 +22,7 @@
 		<result column="refundTime" property="refundTime" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
-		<association property="activity" javaType="com.newgen.bean.Activity">
+		<association property="activity" javaType="com.newgen.activity.app.bean.Activity">
 			<result column="a_id" property="id" />
 			<result column="a_status" property="status" />
 			<result column="a_title" property="title" />
