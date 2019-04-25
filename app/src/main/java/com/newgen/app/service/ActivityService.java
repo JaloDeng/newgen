@@ -1,11 +1,8 @@
 package com.newgen.app.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.Activity;
-import com.newgen.app.mapper.ActivityMapper;
-import com.newgen.app.mapper.BaseMapper;
 
 /**
  * @author Jalo Deng
@@ -16,12 +13,4 @@ import com.newgen.app.mapper.BaseMapper;
 @Service
 public class ActivityService extends BaseService<Activity> {
 
-	@Autowired
-	private ActivityMapper activityMapper;
-	
-	@Override
-	public BaseMapper<Activity> getMapper() {
-		return this.activityMapper;
-	}
-	
 }

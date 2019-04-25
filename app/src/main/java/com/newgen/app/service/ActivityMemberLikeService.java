@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.ActivityMemberLike;
 import com.newgen.app.mapper.ActivityMemberLikeMapper;
-import com.newgen.app.mapper.BaseMapper;
 
 /**
  * @author Jalo Deng
@@ -18,11 +17,6 @@ public class ActivityMemberLikeService extends BaseService<ActivityMemberLike> {
 
 	@Autowired
 	private ActivityMemberLikeMapper activityMemberLikeMapper;
-	
-	@Override
-	public BaseMapper<ActivityMemberLike> getMapper() {
-		return this.activityMemberLikeMapper;
-	}
 	
 	public void deleteByPhone(ActivityMemberLike ActivityMemberLike) {
 		activityMemberLikeMapper.deleteByPhone(ActivityMemberLike);

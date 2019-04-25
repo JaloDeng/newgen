@@ -3,7 +3,7 @@ package com.newgen.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.newgen.app.mapper.BaseMapper;
+import com.newgen.app.bean.MemberPoints;
 import com.newgen.app.mapper.MemberPointsMapper;
 
 /**
@@ -13,17 +13,12 @@ import com.newgen.app.mapper.MemberPointsMapper;
  */
 
 @Service
-public class MemberPointsService<T> extends BaseService<T> {
+public class MemberPointsService extends BaseService<MemberPoints> {
 
 	@Autowired
-	private MemberPointsMapper<T> memberPointsMapper;
+	private MemberPointsMapper<MemberPoints> memberPointsMapper;
 
-	@Override
-	public BaseMapper<T> getMapper() {
-		return this.memberPointsMapper;
-	}
-	
-	public T findByMemberId(Integer memberId) {
-		return this.memberPointsMapper.findByMemberId(memberId);
+	public MemberPoints findByMemberId(Integer memberId) {
+		return memberPointsMapper.findByMemberId(memberId);
 	}
 }

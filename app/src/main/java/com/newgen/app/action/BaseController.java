@@ -23,10 +23,10 @@ import com.newgen.app.util.Constant.MemberPointsType;
 public class BaseController {
 	
 	@Autowired
-	protected MemberPointsService<MemberPoints> memberPointsService;
+	protected MemberPointsService memberPointsService;
 	
 	@Autowired
-	private MemberPointsLogService<MemberPointsLog> memberPointsLogService;
+	private MemberPointsLogService memberPointsLogService;
 
 	/**
 	 * 添加积分处理

@@ -2,12 +2,9 @@ package com.newgen.app.service;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.MemberPointsLog;
-import com.newgen.app.mapper.BaseMapper;
-import com.newgen.app.mapper.MemberPointsLogMapper;
 import com.newgen.app.util.Constant.MemberPointsType;
 
 /**
@@ -17,16 +14,8 @@ import com.newgen.app.util.Constant.MemberPointsType;
  */
 
 @Service
-public class MemberPointsLogService<T> extends BaseService<T> {
+public class MemberPointsLogService extends BaseService<MemberPointsLog> {
 
-	@Autowired
-	private MemberPointsLogMapper<T> memberPointsLogMapper;
-	
-	@Override
-	public BaseMapper<T> getMapper() {
-		return this.memberPointsLogMapper;
-	}
-	
 	public MemberPointsLog newMemberPointsLog(Integer memberId, MemberPointsType memberPointsType) {
 		MemberPointsLog memberPointsLog = new MemberPointsLog();
 		memberPointsLog.setMemberId(memberId);

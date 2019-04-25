@@ -3,6 +3,9 @@ package com.newgen.app.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.newgen.app.mapper.BaseMapper;
 
 /**
@@ -11,17 +14,19 @@ import com.newgen.app.mapper.BaseMapper;
  * @time 2019年4月19日 上午10:38:59
  */
 
-public abstract class BaseService<T> {
+@Service
+public class BaseService<T> {
 
-	public abstract BaseMapper<T> getMapper();
+	@Autowired
+	public BaseMapper<T> baseMapper;
 	
 	public void add(T t) throws Exception {
-		this.getMapper().add(t);
+		baseMapper.add(t);
 	}
 
 	public boolean update(T t) {
 		try {
-			this.getMapper().update(t);
+			baseMapper.update(t);
 			return true;
 		} catch (Exception var3) {
 			var3.printStackTrace();
@@ -36,28 +41,28 @@ public abstract class BaseService<T> {
 
 			for (int var3 = 0; var3 < var4; ++var3) {
 				Object id = var5[var3];
-				this.getMapper().delete(id);
+				baseMapper.delete(id);
 			}
 
 		}
 	}
 
 	public T queryById(Object id) throws Exception {
-		return this.getMapper().queryById(id);
+		return baseMapper.queryById(id);
 	}
 	
 	public List<T> findList(Map<String, Object> var1) throws Exception {
 		ifPaging(var1);
-		return this.getMapper().findList(var1);
+		return baseMapper.findList(var1);
 	}
 	
 	public List<Map<?, ?>> findListMap(Map<String, Object> var1) throws Exception {
 		ifPaging(var1);
-		return this.getMapper().findListMap(var1);
+		return baseMapper.findListMap(var1);
 	}
 	
 	public int count(Map<String, Object> var1)  throws Exception {
-		return this.getMapper().count(var1);
+		return baseMapper.count(var1);
 	}
 	
 	private void ifPaging(Map<String, Object> var1) {
