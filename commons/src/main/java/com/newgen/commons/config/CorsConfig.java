@@ -1,5 +1,6 @@
 package com.newgen.commons.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2019-04-25 10:45
  */
 
+@Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
 	@Override

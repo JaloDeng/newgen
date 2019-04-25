@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.newgen.app.result.Result;
+import com.newgen.commons.model.Result;
 import com.newgen.app.util.Constant.MemberPointsType;
 
 import io.swagger.annotations.Api;

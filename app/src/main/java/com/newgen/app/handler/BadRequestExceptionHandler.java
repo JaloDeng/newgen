@@ -16,7 +16,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.newgen.app.result.Result;
+import com.newgen.commons.model.Result;
 
 /**
  * @author Jalo Deng

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newgen.app.bean.ActivityMemberLike;
 import com.newgen.app.bean.ActivityReview;
 import com.newgen.app.bean.ActivitySignUp;
-import com.newgen.app.result.Result;
+import com.newgen.commons.model.Result;
 import com.newgen.app.service.ActivityMemberLikeService;
 import com.newgen.app.service.ActivityReviewService;
 import com.newgen.app.service.ActivityService;
