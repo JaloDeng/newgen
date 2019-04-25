@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.newgen.backmanager.service.ActivityPermissionService;
+import com.newgen.backmanager.service.ActivityRoleService;
 import com.newgen.commons.model.Result;
 
 import io.swagger.annotations.Api;
@@ -32,6 +33,9 @@ public class AdminController {
 	@Autowired
 	private ActivityPermissionService activityPermissionService;
 	
+	@Autowired
+	private ActivityRoleService activityRoleService;
+	
 	@ApiOperation("获取权限列表")
 	@RequestMapping(value = { "/getPermissionList" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
@@ -46,5 +50,21 @@ public class AdminController {
 	public @ResponseBody Result getPermissionById(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		return new Result(1, "", activityPermissionService.queryById(id));
+	}
+	
+	@ApiOperation("获取角色列表")
+	@RequestMapping(value = { "/getRoleList" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result getRoleList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		return new Result(1, "", activityRoleService.findList(params));
+	}
+	
+	@ApiOperation("根据ID获取角色")
+	@RequestMapping(value = { "/getRoleById" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result getRoleById(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		return new Result(1, "", activityRoleService.queryById(id));
 	}
 }
