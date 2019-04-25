@@ -3,6 +3,7 @@ package com.newgen.app.service;
 import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.ActivitySponsor;
+import com.newgen.commons.service.BaseService;
 
 /**
  * @author Jalo Deng

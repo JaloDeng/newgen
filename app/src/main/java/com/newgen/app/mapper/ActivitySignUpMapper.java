@@ -1,6 +1,7 @@
 package com.newgen.app.mapper;
 
 import com.newgen.app.bean.ActivitySignUp;
+import com.newgen.commons.mapper.BaseMapper;
 
 /**
  * @author Jalo Deng

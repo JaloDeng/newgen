@@ -3,6 +3,7 @@ package com.newgen.app.service;
 import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.ActivitySignUp;
+import com.newgen.commons.service.BaseService;
 
 /**
  * @author Jalo Deng

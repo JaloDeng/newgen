@@ -3,6 +3,7 @@ package com.newgen.app.service;
 import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.ActivityReview;
+import com.newgen.commons.service.BaseService;
 
 /**
  * @author Jalo Deng

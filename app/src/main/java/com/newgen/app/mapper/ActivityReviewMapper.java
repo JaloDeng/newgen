@@ -1,6 +1,7 @@
 package com.newgen.app.mapper;
 
 import com.newgen.app.bean.ActivityReview;
+import com.newgen.commons.mapper.BaseMapper;
 
 /**
  * @author Jalo Deng

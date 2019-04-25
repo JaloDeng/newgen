@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.MemberPointsLog;
 import com.newgen.app.util.Constant.MemberPointsType;
+import com.newgen.commons.service.BaseService;
 
 /**
  * @author Jalo Deng

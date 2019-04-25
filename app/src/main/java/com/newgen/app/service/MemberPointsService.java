@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.newgen.app.bean.MemberPoints;
 import com.newgen.app.mapper.MemberPointsMapper;
+import com.newgen.commons.service.BaseService;
 
 /**
  * @author Jalo Deng
@@ -16,7 +17,7 @@ import com.newgen.app.mapper.MemberPointsMapper;
 public class MemberPointsService extends BaseService<MemberPoints> {
 
 	@Autowired
-	private MemberPointsMapper<MemberPoints> memberPointsMapper;
+	private MemberPointsMapper memberPointsMapper;
 
 	public MemberPoints findByMemberId(Integer memberId) {
 		return memberPointsMapper.findByMemberId(memberId);
