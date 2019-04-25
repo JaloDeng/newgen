@@ -1,2 +1,2 @@
 rootProject.name = 'newgen'
-include 'app', 'backmanager', 'commons'
+include 'commons', 'app', 'backmanager'
