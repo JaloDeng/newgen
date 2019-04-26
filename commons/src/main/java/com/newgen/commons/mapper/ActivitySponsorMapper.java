@@ -1,7 +1,6 @@
 package com.newgen.commons.mapper;
 
 import com.newgen.commons.bean.ActivitySponsor;
-import com.newgen.commons.mapper.BaseMapper;
 
 /**
  * @author Jalo Deng

@@ -1,9 +1,8 @@
-package com.newgen.app.service;
+package com.newgen.commons.service;
 
 import org.springframework.stereotype.Service;
 
-import com.newgen.app.bean.ActivitySignUp;
-import com.newgen.commons.service.BaseService;
+import com.newgen.commons.bean.ActivitySignUp;
 
 /**
  * @author Jalo Deng

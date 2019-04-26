@@ -1,11 +1,10 @@
-package com.newgen.app.service;
+package com.newgen.commons.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.newgen.app.bean.ActivityMemberLike;
-import com.newgen.app.mapper.ActivityMemberLikeMapper;
-import com.newgen.commons.service.BaseService;
+import com.newgen.commons.bean.ActivityMemberLike;
+import com.newgen.commons.mapper.ActivityMemberLikeMapper;
 
 /**
  * @author Jalo Deng

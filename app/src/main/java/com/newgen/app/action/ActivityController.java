@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.newgen.app.bean.ActivityMemberLike;
-import com.newgen.app.bean.ActivityReview;
-import com.newgen.app.bean.ActivitySignUp;
+import com.newgen.commons.bean.ActivityMemberLike;
+import com.newgen.commons.bean.ActivityReview;
+import com.newgen.commons.bean.ActivitySignUp;
 import com.newgen.commons.model.Result;
-import com.newgen.app.service.ActivityMemberLikeService;
-import com.newgen.app.service.ActivityReviewService;
-import com.newgen.app.service.ActivityService;
-import com.newgen.app.service.ActivitySignUpService;
-import com.newgen.app.service.ActivitySponsorService;
+import com.newgen.commons.service.ActivityMemberLikeService;
+import com.newgen.commons.service.ActivityReviewService;
+import com.newgen.commons.service.ActivityService;
+import com.newgen.commons.service.ActivitySignUpService;
+import com.newgen.commons.service.ActivitySponsorService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

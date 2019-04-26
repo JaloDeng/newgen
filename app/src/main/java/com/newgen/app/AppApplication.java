@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -15,9 +16,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @time 2019年4月19日 上午10:38:59
  */
 
+@ComponentScan(basePackages = "com.newgen")
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan("com.newgen.app.mapper")
+@MapperScan({"com.newgen.app.mapper", "com.newgen.commons.mapper"})
 public class AppApplication {
 
 	@Bean
