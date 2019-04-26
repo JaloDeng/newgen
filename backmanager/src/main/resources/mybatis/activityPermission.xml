@@ -31,4 +31,12 @@
 		where id = #{value}
 	</select>
 
+	<select id="queryByAdminId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select ap.*
+		from t_admin a 
+		left join t_activity_admin_role ar on ar.adminId = a.id
+		left join t_activity_role_permission rp on rp.activityRoleId = ar.activityRoleId
+		left join t_activity_permission ap on ap.id = rp.activityPermissionId
+		where a.id = #{adminId}
+	</select>
 </mapper>

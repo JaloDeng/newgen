@@ -26,8 +26,8 @@ import io.swagger.annotations.ApiOperation;
  * @date 2019-04-25 11:02
  */
 
-@Controller
 @Api(value = "AdminController", tags = {"后台登陆模块"})
+@Controller
 public class AdminController {
 
 	@Autowired
@@ -50,6 +50,14 @@ public class AdminController {
 	public @ResponseBody Result getPermissionById(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		return new Result(1, "", activityPermissionService.queryById(id));
+	}
+	
+	@ApiOperation("根据adminId获取权限")
+	@RequestMapping(value = { "/getPermissionByAdminId" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result getPermissionByAdminId(@RequestParam Integer adminId, HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		return new Result(1, "", activityPermissionService.queryByAdminId(adminId));
 	}
 	
 	@ApiOperation("获取角色列表")

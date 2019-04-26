@@ -1,8 +1,12 @@
 package com.newgen.backmanager.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newgen.backmanager.bean.ActivityPermission;
+import com.newgen.backmanager.mapper.ActivityPermissionMapper;
 import com.newgen.commons.service.BaseService;
 
 /**
@@ -14,4 +18,10 @@ import com.newgen.commons.service.BaseService;
 @Service
 public class ActivityPermissionService extends BaseService<ActivityPermission> {
 	
+	@Autowired
+	private ActivityPermissionMapper activityPermissionMapper;
+	
+	public List<ActivityPermission> queryByAdminId(Integer adminId) {
+		return activityPermissionMapper.queryByAdminId(adminId);
+	}
 }
