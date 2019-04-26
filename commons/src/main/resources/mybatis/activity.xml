@@ -98,19 +98,22 @@
 	
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
-		id, status, title, summary, sponsorId, homePath, serialNumber, editor, FromTime, ToTime, address, detail, 
+		id, status, title, summary, sponsorId, homePath, serialNumber, editor, fromTime, toTime, address, detail, 
 		expenseExplanation, refundExplanation, notice, clickCount, likeCount, shareCount, remark, 
 		releaseTime, createTime, updateTime
 	</sql>
 	
 	<!-- 插入记录 -->
-	<insert id="add" parameterType="Object" >
+	<insert id="addAndGetId" parameterType="com.newgen.commons.bean.Activity">
+		<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		insert into t_activity(title, summary, sponsorId, homePath, serialNumber, editor,
-							FromTime, ToTime, address, detail, expenseExplanation, refundExplanation,
+							fromTime, toTime, address, detail, expenseExplanation, refundExplanation,
 							notice, remark, createTime, updateTime
 		)
 		values(#{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
-			#{FromTime}, #{ToTime}, #{address}, #{detail}, #{expenseExplanation}, #{refundExplanation}, 
+			#{fromTime}, #{toTime}, #{address}, #{detail}, #{expenseExplanation}, #{refundExplanation}, 
 			#{notice}, #{remark}, #{createTime}, #{updateTime})
 	</insert>
 	
@@ -178,4 +181,7 @@
 		where id = #{id}
 	</update>
 
+	<select id="count" parameterType="Object" resultType="java.lang.Integer">
+		select count(1) from t_activity where title = #{title}
+	</select>
 </mapper>

@@ -80,7 +80,7 @@ CREATE TABLE `t_activity_sponsor` (
   `phone` varchar(100) DEFAULT NULL COMMENT '电话',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
   `logoPath` varchar(500) DEFAULT NULL COMMENT 'logo路径',
-  `score` int(11) DEFAULT NULL COMMENT '星级分数',
+  `score` int(11) DEFAULT '0' COMMENT '星级分数',
   `declaration` varchar(500) DEFAULT NULL COMMENT '宣言、口号、公告、声明',
   `summary` varchar(1000) DEFAULT NULL COMMENT '简介',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',

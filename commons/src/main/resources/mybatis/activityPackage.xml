@@ -51,5 +51,9 @@
 			explanation = #{explanation}, updateTime = #{updateTime}
 		where id = #{id}
 	</update>
+	
+	<delete id="delete" parameterType="Object" >
+		DELETE ap FROM t_activity_package ap WHERE ap.id = #{value}
+	</delete>
 
 </mapper>
