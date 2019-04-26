@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.commons.mapper.ActivitySponsorMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.commons.bean.ActivitySponsor" >
+		<result column="id" property="id" />
+		<result column="serialNumber" property="serialNumber" />
+		<result column="name" property="name" />
+		<result column="contact" property="contact" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="logoPath" property="logoPath" />
+		<result column="score" property="score" />
+		<result column="declaration" property="declaration" />
+		<result column="summary" property="summary" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+		<collection property="activities" ofType="com.newgen.commons.bean.Activity">
+			<result column="a_id" property="id" />
+			<result column="a_status" property="status" />
+			<result column="a_title" property="title" />
+			<result column="a_summary" property="summary" />
+			<result column="a_sponsorId" property="sponsorId" />
+			<result column="a_homePath" property="homePath" />
+			<result column="a_serialNumber" property="serialNumber" />
+			<result column="a_editor" property="editor" />
+			<result column="a_fromTime" property="fromTime" />
+			<result column="a_toTime" property="toTime" />
+			<result column="a_address" property="address" />
+			<result column="a_detail" property="detail" />
+			<result column="a_expenseExplanation" property="expenseExplanation" />
+			<result column="a_refundExplanation" property="refundExplanation" />
+			<result column="a_notice" property="notice" />
+			<result column="a_clickCount" property="clickCount" />
+			<result column="a_likeCount" property="likeCount" />
+			<result column="a_shareCount" property="shareCount" />
+			<result column="a_remark" property="remark" />
+			<result column="a_releaseTime" property="releaseTime" />
+			<result column="a_createTime" property="createTime" />
+			<result column="a_updateTime" property="updateTime" />
+		</collection>
+	</resultMap>
+
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, serialNumber, name, contact, phone, address, logoPath, score, declaration, summary, createTime, updateTime
+	</sql>
+	
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into t_activity_sponsor(serialNumber, name, contact, phone, address, logoPath,
+							score, declaration, summary, createTime, updateTime
+		)
+		values(#{serialNumber}, #{name}, #{contact}, #{phone}, #{address}, #{logoPath}, 
+			#{score}, #{declaration}, #{summary}, #{createTime}, #{updateTime}
+	</insert>
+	
+	<select id="findList" parameterType="Object" resultType="java.util.Map">
+		select 
+			asp.id, 
+			asp.serialNumber, 
+			asp.name, 
+			asp.contact, 
+			asp.phone, 
+			asp.address, 
+			asp.logoPath, 
+			asp.score, 
+			asp.declaration, 
+			asp.summary, 
+			asp.createTime,
+			asp.updateTime
+		from t_activity_sponsor asp
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
+	</select>
+	
+	<select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT 
+			asp.id, 
+			asp.serialNumber, 
+			asp.name, 
+			asp.contact, 
+			asp.phone, 
+			asp.address, 
+			asp.logoPath, 
+			asp.score, 
+			asp.declaration, 
+			asp.summary, 
+			asp.createTime,
+			asp.updateTime,
+			a.id AS a_id,
+			a.status AS a_status,
+			a.title AS a_title,
+			a.summary AS a_summary,
+			a.sponsorId AS a_sponsorId,
+			a.homePath AS a_homePath,
+			a.serialNumber AS a_serialNumber,
+			a.fromTime AS a_fromTime,
+			a.toTime AS a_toTime,
+			a.address AS a_address,
+			a.clickCount AS a_clickCount,
+			a.likeCount AS a_likeCount,
+			a.shareCount AS a_shareCount,
+			a.releaseTime AS a_releaseTime,
+			a.createTime AS a_createTime
+		from t_activity_sponsor asp
+		inner join t_activity a on a.sponsorId = asp.id
+		<where>
+		<if test="value != null and value > 0">
+			and asp.id = #{value}
+		</if>
+		</where>
+	</select>
+
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object">
+		update t_activity_sponsor set name = #{name}, contact = #{contact}, phone = #{phone}, address = #{address},
+		logoPath = #{logoPath}, score = #{score}, declaration = #{declaration}, summary = #{summary}, 
+		updateTime = #{updateTime}
+		where id = #{id}
+	</update>
+
+</mapper>
