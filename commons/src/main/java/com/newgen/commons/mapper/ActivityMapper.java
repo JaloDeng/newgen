@@ -10,5 +10,4 @@ import com.newgen.commons.bean.Activity;
 
 public interface ActivityMapper extends BaseMapper<Activity> {
 	
-	public Long addAndGetId(Activity activity);
 }

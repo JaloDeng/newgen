@@ -35,9 +35,13 @@
 
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_activity_package(activityId, price, quota, title, explanation, createTime, updateTime)
-		values(#{activityId}, #{price}, #{quota}, #{title}, #{explanation}, #{createTime}, #{updateTime})
+		insert into t_activity_package(id, activityId, price, quota, title, explanation, createTime, updateTime)
+		values(#{id}, #{activityId}, #{price}, #{quota}, #{title}, #{explanation}, #{createTime}, #{updateTime})
 	</insert>
+	
+	<select id="findIdByActivityId" resultType="java.lang.String">
+		select ap.id from t_activity_package ap where ap.activityId = #{activityId}
+	</select>
 	
 	<select id="findList" parameterType="Object">
 		select <include refid="Base_Column_List" /> 

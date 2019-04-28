@@ -104,15 +104,12 @@
 	</sql>
 	
 	<!-- 插入记录 -->
-	<insert id="addAndGetId" parameterType="com.newgen.commons.bean.Activity">
-		<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-		insert into t_activity(title, summary, sponsorId, homePath, serialNumber, editor,
+	<insert id="add" parameterType="com.newgen.commons.bean.Activity">
+		insert into t_activity(id, title, summary, sponsorId, homePath, serialNumber, editor,
 							fromTime, toTime, address, detail, expenseExplanation, refundExplanation,
 							notice, remark, createTime, updateTime
 		)
-		values(#{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
+		values(#{id}, #{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
 			#{fromTime}, #{toTime}, #{address}, #{detail}, #{expenseExplanation}, #{refundExplanation}, 
 			#{notice}, #{remark}, #{createTime}, #{updateTime})
 	</insert>
@@ -140,7 +137,7 @@
 		</if>
 	</select>
 	
-	<select id="queryById" parameterType="java.lang.Long" resultMap="mapBaseResult">
+	<select id="queryById" parameterType="Object" resultMap="mapBaseResult">
 		select 
 			a.*, 
 			asp.name asp_sponsor,

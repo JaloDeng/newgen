@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newgen.commons.bean.ActivitySponsor;
 import com.newgen.commons.model.Result;
+import com.newgen.commons.util.StringUtil;
 
 /**
  * @author Jalo Deng
@@ -27,7 +28,7 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 	@Transactional
 	public Result save(ActivitySponsor activitySponsor) throws Exception {
 		activitySponsor.setUpdateTime(new Date());
-		if (activitySponsor.getId() != null) {
+		if (activitySponsor.getId() != null && !"".equals(activitySponsor.getId())) {
 			super.update(activitySponsor);
 			return new Result(1, "修改成功", null);
 		} else {
@@ -36,6 +37,7 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 				LOGGER.error(String.format("添加失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
 				return new Result(0, String.format("添加失败，主办方[%s]已存在", activitySponsor.getName()), null);
 			}
+			activitySponsor.setId(StringUtil.getDateId());
 			activitySponsor.setCreateTime(new Date());
 			super.add(activitySponsor);
 			return new Result(1, "添加成功", null);

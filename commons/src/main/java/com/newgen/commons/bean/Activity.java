@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Activity {
 
-	private Long id;
+	private String id;
 	
 	private Integer status;
 	
@@ -19,7 +19,7 @@ public class Activity {
 	
 	private String summary;
 	
-	private Integer sponsorId;
+	private String sponsorId;
 	
 	private String homePath;
 	
@@ -69,11 +69,11 @@ public class Activity {
 	private String sponsor;
 	private String logoPath;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -117,11 +117,11 @@ public class Activity {
 		this.serialNumber = serialNumber;
 	}
 
-	public Integer getSponsorId() {
+	public String getSponsorId() {
 		return sponsorId;
 	}
 
-	public void setSponsorId(Integer sponsorId) {
+	public void setSponsorId(String sponsorId) {
 		this.sponsorId = sponsorId;
 	}
 

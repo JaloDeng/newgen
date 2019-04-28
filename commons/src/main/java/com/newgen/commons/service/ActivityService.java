@@ -16,6 +16,7 @@ import com.newgen.commons.bean.Activity;
 import com.newgen.commons.mapper.ActivityMapper;
 import com.newgen.commons.mapper.ActivityPackageMapper;
 import com.newgen.commons.model.Result;
+import com.newgen.commons.util.StringUtil;
 
 /**
  * @author Jalo Deng
@@ -37,11 +38,11 @@ public class ActivityService extends BaseService<Activity> {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Result save(Activity activity) throws Exception {
-		List<Long> oldActivityPackageIds = new ArrayList<>();
-		List<Long> newActivityPackageIds = new ArrayList<>();
+		List<String> oldActivityPackageIds = new ArrayList<>();
+		List<String> newActivityPackageIds = new ArrayList<>();
 		activity.setUpdateTime(new Date());
 		Boolean isNew = false;
-		if (activity.getId() != null) {
+		if (activity.getId() != null && !"".equals(activity.getId())) {
 			oldActivityPackageIds = activityPackageMapper.findIdByActivityId(activity.getId());
 			super.update(activity);
 		} else {
@@ -50,18 +51,20 @@ public class ActivityService extends BaseService<Activity> {
 				LOGGER.error(String.format("添加失败，活动主题已存在 :  title=[%s]", activity.getTitle()));
 				return new Result(0, String.format("添加失败，活动主题[%s]已存在", activity.getTitle()), null);
 			}
+			
+			activity.setId(StringUtil.getDateId());
 			activity.setCreateTime(new Date());
-			Long newId = activityMapper.addAndGetId(activity);
+			activityMapper.add(activity);
 			isNew = true;
-			activity.setId(newId);
 		}
 		activity.getActivityPackages().stream().forEach(activityPackage -> {
 			newActivityPackageIds.add(activityPackage.getId());
 			activityPackage.setActivityId(activity.getId());
 			activityPackage.setUpdateTime(new Date());
-			if (activityPackage.getId() != null) {
+			if (activityPackage.getId() != null && !"".equals(activityPackage.getId())) {
 				activityPackageMapper.update(activityPackage);
 			} else {
+				activityPackage.setId(StringUtil.getDateId());
 				activityPackage.setCreateTime(new Date());
 				activityPackageMapper.add(activityPackage);
 			}

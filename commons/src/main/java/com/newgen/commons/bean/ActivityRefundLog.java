@@ -11,9 +11,9 @@ import java.util.Date;
 
 public class ActivityRefundLog {
 
-	private Long id;
+	private String id;
 	
-	private Long activitySignUpId;
+	private String activitySignUpId;
 	
 	private BigDecimal amount;
 	
@@ -25,19 +25,19 @@ public class ActivityRefundLog {
 	
 	private Date updateTime;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Long getActivitySignUpId() {
+	public String getActivitySignUpId() {
 		return activitySignUpId;
 	}
 
-	public void setActivitySignUpId(Long activitySignUpId) {
+	public void setActivitySignUpId(String activitySignUpId) {
 		this.activitySignUpId = activitySignUpId;
 	}
 

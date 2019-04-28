@@ -1,7 +1,6 @@
 package com.newgen.backmanager.action;
 
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +21,7 @@ import com.newgen.commons.service.ActivityReviewService;
 import com.newgen.commons.service.ActivityService;
 import com.newgen.commons.service.ActivitySignUpService;
 import com.newgen.commons.service.ActivitySponsorService;
+import com.newgen.commons.util.StringUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +51,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动详细信息")
 	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityService.queryById(id));
 	}
@@ -67,7 +67,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取报名信息")
 	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySignUpById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySignUpService.queryById(id));
 	}
@@ -90,7 +90,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动主办方信息")
 	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySponsorById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySponsorService.queryById(id));
 	}
@@ -106,7 +106,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动评价信息")
 	@RequestMapping(value = { "/getActivityReviewById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityReviewById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityReviewById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityReviewService.queryById(id));
 	}
@@ -127,11 +127,10 @@ public class ActivityController {
 		return activityService.save(activity);
 	}
 	
-	@ApiOperation("测试UUID")
-	@RequestMapping(value = { "/getUUID" }, produces = { "application/json;charset=UTF-8" }, 
-			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody UUID getUUID(HttpServletRequest request, HttpServletResponse response)
+	@ApiOperation("测试dateId")
+	@RequestMapping(value = { "/getDateId" }, produces = { "application/json;charset=UTF-8" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody String getDateId(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return UUID.randomUUID();
+		return StringUtil.getDateId();
 	}
 }

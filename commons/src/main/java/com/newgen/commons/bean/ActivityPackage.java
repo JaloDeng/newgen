@@ -11,9 +11,9 @@ import java.util.Date;
 
 public class ActivityPackage {
 
-	private Long id;
+	private String id;
 	
-	private Long activityId;
+	private String activityId;
 	
 	private BigDecimal price;
 	
@@ -27,19 +27,19 @@ public class ActivityPackage {
 	
 	private Date updateTime;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Long getActivityId() {
+	public String getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(Long activityId) {
+	public void setActivityId(String activityId) {
 		this.activityId = activityId;
 	}
 

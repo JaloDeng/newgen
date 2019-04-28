@@ -72,10 +72,10 @@
 	
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_activity_sponsor(serialNumber, name, contact, phone, address, logoPath,
+		insert into t_activity_sponsor(id, serialNumber, name, contact, phone, address, logoPath,
 							score, declaration, summary, createTime, updateTime
 		)
-		values(#{serialNumber}, #{name}, #{contact}, #{phone}, #{address}, #{logoPath}, 
+		values(#{id}, #{serialNumber}, #{name}, #{contact}, #{phone}, #{address}, #{logoPath}, 
 			#{score}, #{declaration}, #{summary}, #{createTime}, #{updateTime}
 		)
 	</insert>
@@ -100,7 +100,7 @@
 		</if>
 	</select>
 	
-	<select id="queryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	<select id="queryById" parameterType="Object" resultMap="BaseResultMap">
 		SELECT 
 			asp.id, 
 			asp.serialNumber, 

@@ -77,9 +77,9 @@
 
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_activity_sign_up(activityId, memberId, activityPackageId, serialNumber, amount, 
+		insert into t_activity_sign_up(id, activityId, memberId, activityPackageId, serialNumber, amount, 
 			channel, name, phone, IDCard, remark, createTime, updateTime)
-		values(#{activityId}, #{memberId}, #{activityPackageId}, #{serialNumber}, #{amount}, 
+		values(#{id}, #{activityId}, #{memberId}, #{activityPackageId}, #{serialNumber}, #{amount}, 
 			#{channel}, #{name}, #{phone}, #{IDCard}, #{remark}, #{createTime}, #{updateTime})
 	</insert>
 	

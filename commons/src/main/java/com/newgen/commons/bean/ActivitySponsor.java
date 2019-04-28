@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ActivitySponsor {
 
-	private Long id;
+	private String id;
 	
 	private String serialNumber;
 	
@@ -37,11 +37,11 @@ public class ActivitySponsor {
 	
 	private List<Activity> activities;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
