@@ -44,7 +44,7 @@ CREATE TABLE `t_member_points_log` (
 DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity` (
   `id` varchar(50) NOT NULL COMMENT '主键',
-  `status` int(11) DEFAULT '0' COMMENT '状态，0：新建、1：报名中、-1：报名结束',
+  `status` int(11) DEFAULT '0' COMMENT '状态，0：新建、1：审核中、2：审核通过、3：报名中、 -1：报名结束',
   `title` varchar(150) DEFAULT NULL COMMENT '主题',
   `summary` varchar(1000) DEFAULT NULL COMMENT '摘要',
   `sponsorId` varchar(50) DEFAULT NULL COMMENT '主办方表主键，t_activity_sponsor.id',
