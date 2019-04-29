@@ -146,7 +146,7 @@
 		where id = #{id}
 	</update>
 	
-	<select id="count" parameterType="Object" resultType="java.lang.Integer">
+	<select id="countByName" parameterType="Object" resultType="java.lang.Integer">
 		select count(1) from t_activity_sponsor where name = #{name}
 	</select>
 

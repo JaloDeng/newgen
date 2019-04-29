@@ -1,15 +1,16 @@
 package com.newgen.commons.service;
 
 import java.util.Date;
-import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newgen.commons.bean.ActivitySponsor;
+import com.newgen.commons.mapper.ActivitySponsorMapper;
 import com.newgen.commons.model.Result;
 import com.newgen.commons.util.StringUtil;
 
@@ -24,23 +25,29 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActivitySponsorService.class);
 	
-	@SuppressWarnings("unchecked")
+	@Autowired
+	private ActivitySponsorMapper activitySponsorMapper;
+	
 	@Transactional
 	public Result save(ActivitySponsor activitySponsor) throws Exception {
 		activitySponsor.setUpdateTime(new Date());
-		if (activitySponsor.getId() != null && !"".equals(activitySponsor.getId())) {
-			super.update(activitySponsor);
-			return new Result(1, "修改成功", null);
-		} else {
-			ObjectMapper om = new ObjectMapper();
-			if (super.count(om.convertValue(activitySponsor, Map.class)) > 0 ) {
+		Integer countByName = activitySponsorMapper.countByName(activitySponsor);
+		if (StringUtils.isEmpty(activitySponsor.getId())) {
+			if (countByName > 0) {
 				LOGGER.error(String.format("添加失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
 				return new Result(0, String.format("添加失败，主办方[%s]已存在", activitySponsor.getName()), null);
 			}
 			activitySponsor.setId(StringUtil.getDateId());
 			activitySponsor.setCreateTime(new Date());
-			super.add(activitySponsor);
+			activitySponsorMapper.add(activitySponsor);
 			return new Result(1, "添加成功", null);
+		} else {
+			if (countByName > 1) {
+				LOGGER.error(String.format("修改失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
+				return new Result(0, String.format("修改失败，主办方[%s]已存在", activitySponsor.getName()), null);
+			}
+			activitySponsorMapper.update(activitySponsor);
+			return new Result(1, "修改成功", null);
 		}
 	}
 }

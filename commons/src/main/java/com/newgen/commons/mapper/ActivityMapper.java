@@ -1,5 +1,9 @@
 package com.newgen.commons.mapper;
 
+import java.util.Date;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.newgen.commons.bean.Activity;
 
 /**
@@ -10,4 +14,7 @@ import com.newgen.commons.bean.Activity;
 
 public interface ActivityMapper extends BaseMapper<Activity> {
 	
+	public Integer updateStatusById(@Param("id") String id, @Param("status") Integer status, @Param("updateTime") Date updateTime);
+
+	public Integer countByTitle(Activity activity);
 }

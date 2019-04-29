@@ -177,8 +177,12 @@
 		notice = #{notice}, remark = #{remark}, updateTime = #{updateTime}
 		where id = #{id}
 	</update>
+	
+	<update id="updateStatusById" parameterType="Object">
+		update t_activity set status = #{status}, updateTime = #{updateTime} where id = #{id}
+	</update>
 
-	<select id="count" parameterType="Object" resultType="java.lang.Integer">
+	<select id="countByTitle" parameterType="Object" resultType="java.lang.Integer">
 		select count(1) from t_activity where title = #{title}
 	</select>
 </mapper>

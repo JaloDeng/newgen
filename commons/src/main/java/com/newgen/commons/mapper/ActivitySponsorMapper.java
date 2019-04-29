@@ -9,5 +9,7 @@ import com.newgen.commons.bean.ActivitySponsor;
  */
 
 public interface ActivitySponsorMapper extends BaseMapper<ActivitySponsor> {
+
+	public Integer countByName(ActivitySponsor activitySponsor);
 	
 }

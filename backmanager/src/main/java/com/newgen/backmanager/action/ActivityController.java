@@ -1,11 +1,14 @@
 package com.newgen.backmanager.action;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +24,8 @@ import com.newgen.commons.service.ActivityReviewService;
 import com.newgen.commons.service.ActivityService;
 import com.newgen.commons.service.ActivitySignUpService;
 import com.newgen.commons.service.ActivitySponsorService;
-import com.newgen.commons.util.StringUtil;
+import com.newgen.commons.util.DataDictionary;
+import com.newgen.commons.util.DataDictionary.ActivityStatusType;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +39,8 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "ActivityController", tags = {"活动模块"})
 @Controller
 public class ActivityController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityController.class);
 	
 	@Autowired
 	private ActivityService activityService;
@@ -127,10 +133,80 @@ public class ActivityController {
 		return activityService.save(activity);
 	}
 	
-	@ApiOperation("测试dateId")
-	@RequestMapping(value = { "/getDateId" }, produces = { "application/json;charset=UTF-8" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody String getDateId(HttpServletRequest request, HttpServletResponse response)
+	@ApiOperation("提交审核")
+	@RequestMapping(value = { "/activityApplyCheck" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result activityApplyCheck(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return StringUtil.getDateId();
+		try {
+			activityService.updateStatusById(id, ActivityStatusType.CHECKING);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+			return new Result(1, "提交失败 : " + e.getMessage(), null);
+		}
+		return new Result(1, "提交成功，请等待审核", null);
+	}
+	
+	@ApiOperation("审核通过")
+	@RequestMapping(value = { "/activityPassed" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result activityPassed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			activityService.updateStatusById(id, ActivityStatusType.PASSED);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+			return new Result(1, "审核通过失败 : " + e.getMessage(), null);
+		}
+		return new Result(1, "审核通过成功", null);
+	}
+	
+	@ApiOperation("审核退回")
+	@RequestMapping(value = { "/activityNoPassed" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result activityNoPassed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			activityService.updateStatusById(id, ActivityStatusType.NEW);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+			return new Result(1, "审核退回失败 : " + e.getMessage(), null);
+		}
+		return new Result(1, "审核退回成功", null);
+	}
+	
+	@ApiOperation("活动发布")
+	@RequestMapping(value = { "/activityRelease" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result activityRelease(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			activityService.updateStatusById(id, ActivityStatusType.SIGNUP);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+			return new Result(1, "活动发布失败 : " + e.getMessage(), null);
+		}
+		return new Result(1, "活动发布成功", null);
+	}
+	
+	@ApiOperation("关闭报名")
+	@RequestMapping(value = { "/activityClosed" }, produces = { "application/json;charset=UTF-8" }, 
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody Result activityClosed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		try {
+			activityService.updateStatusById(id, ActivityStatusType.CLOSED);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+			return new Result(1, "关闭报名失败 : " + e.getMessage(), null);
+		}
+		return new Result(1, "关闭报名成功", null);
+	}
+	
+	@ApiOperation("测试数据")
+	@RequestMapping(value = { "/test" }, produces = { "application/json;charset=UTF-8" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody List<Map<String, Object>> test(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		return DataDictionary.getActivityStatusTypeValues();
 	}
 }
