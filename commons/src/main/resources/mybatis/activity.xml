@@ -163,7 +163,7 @@
 		left join t_activity_member_like aml on aml.activityId = a.id
 		left join t_member m on m.phonenumber = aml.phone
 		<where>
-		<if test="value != null and value > 0">
+		<if test="value != null">
 			and a.id = #{value}
 		</if>
 		</where>

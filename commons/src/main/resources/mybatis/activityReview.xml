@@ -64,7 +64,7 @@
 		inner join t_activity a on a.id = ar.activityId
 		inner join t_activity_sign_up asu on asu.id = ar.activitySignUpId
 		<where>
-		<if test="value != null and value > 0">
+		<if test="value != null">
 			and ar.id = #{value}
 		</if>
 		</where>
