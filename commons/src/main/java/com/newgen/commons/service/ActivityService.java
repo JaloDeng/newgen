@@ -42,25 +42,21 @@ public class ActivityService extends BaseService<Activity> {
 	 */
 	@Transactional
 	public Result save(Activity activity) throws Exception {
+		// 先判断活动主题是否重复
+		if (activityMapper.countByTitle(activity) > 0) {
+			LOGGER.error(String.format("保存失败，活动主题已存在 :  title=[%s]", activity.getTitle()));
+			return new Result(0, String.format("保存失败，活动主题[%s]已存在", activity.getTitle()), null);
+		}
 		List<Long> oldActivityPackageIds = new ArrayList<>();
 		List<Long> newActivityPackageIds = new ArrayList<>();
 		activity.setUpdateTime(new Date());
 		String msg = "修改成功";
-		Integer countByTitle = activityMapper.countByTitle(activity);
 		// 新增或者更新t_activity表
 		if (activity.getId() == null) {
-			if (countByTitle > 0) {
-				LOGGER.error(String.format("添加失败，活动主题已存在 :  title=[%s]", activity.getTitle()));
-				return new Result(0, String.format("添加失败，活动主题[%s]已存在", activity.getTitle()), null);
-			}
 			activity.setCreateTime(new Date());
 			activityMapper.add(activity);
 			msg = "新增成功";
 		} else {
-			if (countByTitle > 1) {
-				LOGGER.error(String.format("修改失败，活动主题已存在 :  title=[%s]", activity.getTitle()));
-				return new Result(0, String.format("修改失败，活动主题[%s]已存在", activity.getTitle()), null);
-			}
 			oldActivityPackageIds = activityPackageMapper.findIdByActivityId(activity.getId());
 			activityMapper.update(activity);
 		}

@@ -29,20 +29,15 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 	@Transactional
 	public Result save(ActivitySponsor activitySponsor) throws Exception {
 		activitySponsor.setUpdateTime(new Date());
-		Integer countByName = activitySponsorMapper.countByName(activitySponsor);
+		if (activitySponsorMapper.countByName(activitySponsor) > 0) {
+			LOGGER.error(String.format("保存失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
+			return new Result(0, String.format("保存失败，主办方[%s]已存在", activitySponsor.getName()), null);
+		}
 		if (activitySponsor.getId() == null) {
-			if (countByName > 0) {
-				LOGGER.error(String.format("添加失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
-				return new Result(0, String.format("添加失败，主办方[%s]已存在", activitySponsor.getName()), null);
-			}
 			activitySponsor.setCreateTime(new Date());
 			activitySponsorMapper.add(activitySponsor);
 			return new Result(1, "添加成功", null);
 		} else {
-			if (countByName > 1) {
-				LOGGER.error(String.format("修改失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
-				return new Result(0, String.format("修改失败，主办方[%s]已存在", activitySponsor.getName()), null);
-			}
 			activitySponsorMapper.update(activitySponsor);
 			return new Result(1, "修改成功", null);
 		}
