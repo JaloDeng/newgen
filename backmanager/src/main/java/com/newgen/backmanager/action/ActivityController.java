@@ -57,7 +57,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动详细信息")
 	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityService.queryById(id));
 	}
@@ -73,7 +73,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取报名信息")
 	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySignUpById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySignUpService.queryById(id));
 	}
@@ -96,7 +96,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动主办方信息")
 	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySponsorById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySponsorService.queryById(id));
 	}
@@ -112,7 +112,7 @@ public class ActivityController {
 	@ApiOperation("根据ID获取活动评价信息")
 	@RequestMapping(value = { "/getActivityReviewById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityReviewById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityReviewById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityReviewService.queryById(id));
 	}
@@ -136,7 +136,7 @@ public class ActivityController {
 	@ApiOperation("提交审核")
 	@RequestMapping(value = { "/activityApplyCheck" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result activityApplyCheck(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityApplyCheck(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {
 			activityService.updateStatusById(id, ActivityStatusType.CHECKING);
@@ -150,7 +150,7 @@ public class ActivityController {
 	@ApiOperation("审核通过")
 	@RequestMapping(value = { "/activityPassed" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result activityPassed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityPassed(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {
 			activityService.updateStatusById(id, ActivityStatusType.PASSED);
@@ -164,7 +164,7 @@ public class ActivityController {
 	@ApiOperation("审核退回")
 	@RequestMapping(value = { "/activityNoPassed" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result activityNoPassed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityNoPassed(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {
 			activityService.updateStatusById(id, ActivityStatusType.NEW);
@@ -178,7 +178,7 @@ public class ActivityController {
 	@ApiOperation("活动发布")
 	@RequestMapping(value = { "/activityRelease" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result activityRelease(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityRelease(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {
 			activityService.updateStatusById(id, ActivityStatusType.SIGNUP);
@@ -192,7 +192,7 @@ public class ActivityController {
 	@ApiOperation("关闭报名")
 	@RequestMapping(value = { "/activityClosed" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result activityClosed(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result activityClosed(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		try {
 			activityService.updateStatusById(id, ActivityStatusType.CLOSED);

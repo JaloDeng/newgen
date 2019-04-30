@@ -36,9 +36,9 @@
 	</sql>
 	
 	<!-- 插入记录 -->
-	<insert id="add" parameterType="Object" >
-		insert into t_activity_review(id, activitySignUpId, activityId, content, picture, createTime, updateTime)
-		values(#{id}, #{activitySignUpId}, #{activityId}, #{content}, #{picture}, #{createTime}, #{updateTime})
+	<insert id="add" parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+		insert into t_activity_review(activitySignUpId, activityId, content, picture, createTime, updateTime)
+		values(#{activitySignUpId}, #{activityId}, #{content}, #{picture}, #{createTime}, #{updateTime})
 	</insert>
 	
 	<select id="findList" parameterType="Object" resultType="java.util.Map">

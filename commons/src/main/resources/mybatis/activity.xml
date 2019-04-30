@@ -104,12 +104,12 @@
 	</sql>
 	
 	<!-- 插入记录 -->
-	<insert id="add" parameterType="com.newgen.commons.bean.Activity">
-		insert into t_activity(id, title, summary, sponsorId, homePath, serialNumber, editor,
+	<insert id="add" parameterType="com.newgen.commons.bean.Activity" useGeneratedKeys="true" keyProperty="id">
+		insert into t_activity(title, summary, sponsorId, homePath, serialNumber, editor,
 							fromTime, toTime, address, detail, expenseExplanation, refundExplanation,
 							notice, remark, createTime, updateTime
 		)
-		values(#{id}, #{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
+		values(#{title}, #{summary}, #{sponsorId}, #{homePath}, #{serialNumber}, #{editor}, 
 			#{fromTime}, #{toTime}, #{address}, #{detail}, #{expenseExplanation}, #{refundExplanation}, 
 			#{notice}, #{remark}, #{createTime}, #{updateTime})
 	</insert>

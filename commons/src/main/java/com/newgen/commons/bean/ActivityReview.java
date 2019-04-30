@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 
 public class ActivityReview {
 
-	private String id;
+	private Long id;
 	
 	@NotNull(message = "活动报名ID不能为空")
-	private String activitySignUpId;
+	private Long activitySignUpId;
 	
 	@NotNull(message = "活动ID不能为空")
-	private String activityId;
+	private Long activityId;
 	
 	@NotNull(message = "评价内容不能为空")
 	private String content;
@@ -29,27 +29,27 @@ public class ActivityReview {
 	
 	private Date updateTime;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getActivitySignUpId() {
+	public Long getActivitySignUpId() {
 		return activitySignUpId;
 	}
 
-	public void setActivitySignUpId(String activitySignUpId) {
+	public void setActivitySignUpId(Long activitySignUpId) {
 		this.activitySignUpId = activitySignUpId;
 	}
 
-	public String getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(String activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 

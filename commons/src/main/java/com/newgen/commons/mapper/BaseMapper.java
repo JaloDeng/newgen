@@ -11,11 +11,11 @@ import java.util.Map;
 
 public interface BaseMapper<T> {
 
-	public void add(T t);
+	public Integer add(T t);
 
-	public void update(T t);
+	public Integer update(T t);
 
-	public void delete(Object object);
+	public Integer delete(Object object);
 
 	public List<T> findPageList(Map<String, Object> params);
 

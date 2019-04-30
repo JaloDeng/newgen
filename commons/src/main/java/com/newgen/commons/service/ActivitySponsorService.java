@@ -2,7 +2,6 @@ package com.newgen.commons.service;
 
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.newgen.commons.bean.ActivitySponsor;
 import com.newgen.commons.mapper.ActivitySponsorMapper;
 import com.newgen.commons.model.Result;
-import com.newgen.commons.util.StringUtil;
 
 /**
  * @author Jalo Deng
@@ -32,12 +30,11 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 	public Result save(ActivitySponsor activitySponsor) throws Exception {
 		activitySponsor.setUpdateTime(new Date());
 		Integer countByName = activitySponsorMapper.countByName(activitySponsor);
-		if (StringUtils.isEmpty(activitySponsor.getId())) {
+		if (activitySponsor.getId() == null) {
 			if (countByName > 0) {
 				LOGGER.error(String.format("添加失败，主办方已存在 :  name=[%s]", activitySponsor.getName()));
 				return new Result(0, String.format("添加失败，主办方[%s]已存在", activitySponsor.getName()), null);
 			}
-			activitySponsor.setId(StringUtil.getDateId());
 			activitySponsor.setCreateTime(new Date());
 			activitySponsorMapper.add(activitySponsor);
 			return new Result(1, "添加成功", null);

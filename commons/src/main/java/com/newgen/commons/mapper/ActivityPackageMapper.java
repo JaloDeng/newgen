@@ -14,5 +14,5 @@ import com.newgen.commons.bean.ActivityPackage;
 
 public interface ActivityPackageMapper extends BaseMapper<ActivityPackage> {
 	
-	public List<String> findIdByActivityId(@Param("activityId") String activityId);
+	public List<Long> findIdByActivityId(@Param("activityId") Long activityId);
 }

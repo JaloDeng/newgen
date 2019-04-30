@@ -72,10 +72,10 @@
 	
 	<!-- 插入记录 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_activity_sponsor(id, serialNumber, name, contact, phone, address, logoPath,
+		insert into t_activity_sponsor(serialNumber, name, contact, phone, address, logoPath,
 							score, declaration, summary, createTime, updateTime
 		)
-		values(#{id}, #{serialNumber}, #{name}, #{contact}, #{phone}, #{address}, #{logoPath}, 
+		values(#{serialNumber}, #{name}, #{contact}, #{phone}, #{address}, #{logoPath}, 
 			#{score}, #{declaration}, #{summary}, #{createTime}, #{updateTime}
 		)
 	</insert>

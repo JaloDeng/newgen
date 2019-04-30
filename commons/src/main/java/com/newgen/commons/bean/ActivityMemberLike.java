@@ -14,7 +14,7 @@ public class ActivityMemberLike {
 	private Long id;
 	
 	@NotNull(message = "活动ID不能为空")
-	private String activityId;
+	private Long activityId;
 	
 	@Pattern(regexp = "^\\d{11,11}$", message = "请输入正确的手机号码")
 	private String phone;
@@ -27,11 +27,11 @@ public class ActivityMemberLike {
 		this.id = id;
 	}
 
-	public String getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(String activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 

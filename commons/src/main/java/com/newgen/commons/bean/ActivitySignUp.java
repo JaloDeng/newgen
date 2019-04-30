@@ -18,15 +18,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivitySignUp {
 
-	private String id;
+	private Long id;
 	
 	@NotNull(message = "活动ID不能为空")
-	private String activityId;
+	private Long activityId;
 	
 	private Integer memberId;
 	
 	@NotNull(message = "活动套餐ID不能为空")
-	private String activityPackageId;
+	private Long activityPackageId;
 	
 	private String serialNumber;
 	
@@ -57,19 +57,19 @@ public class ActivitySignUp {
 	
 	private Activity activity;
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(String activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 
@@ -81,11 +81,11 @@ public class ActivitySignUp {
 		this.memberId = memberId;
 	}
 
-	public String getActivityPackageId() {
+	public Long getActivityPackageId() {
 		return activityPackageId;
 	}
 
-	public void setActivityPackageId(String activityPackageId) {
+	public void setActivityPackageId(Long activityPackageId) {
 		this.activityPackageId = activityPackageId;
 	}
 

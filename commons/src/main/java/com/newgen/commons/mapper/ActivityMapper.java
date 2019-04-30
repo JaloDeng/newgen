@@ -14,7 +14,7 @@ import com.newgen.commons.bean.Activity;
 
 public interface ActivityMapper extends BaseMapper<Activity> {
 	
-	public Integer updateStatusById(@Param("id") String id, @Param("status") Integer status, @Param("updateTime") Date updateTime);
+	public Integer updateStatusById(@Param("id") Long id, @Param("status") Integer status, @Param("updateTime") Date updateTime);
 
 	public Integer countByTitle(Activity activity);
 }

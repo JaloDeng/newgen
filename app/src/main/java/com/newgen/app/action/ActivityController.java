@@ -27,7 +27,6 @@ import com.newgen.commons.service.ActivityReviewService;
 import com.newgen.commons.service.ActivityService;
 import com.newgen.commons.service.ActivitySignUpService;
 import com.newgen.commons.service.ActivitySponsorService;
-import com.newgen.commons.util.StringUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,7 +61,7 @@ public class ActivityController extends BaseController {
 	@ApiOperation("根据ID获取活动详细信息")
 	@RequestMapping(value = { "/getActivityById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityService.queryById(id));
 	}
@@ -78,7 +77,7 @@ public class ActivityController extends BaseController {
 	@ApiOperation("根据ID获取报名信息")
 	@RequestMapping(value = { "/getActivitySignUpById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySignUpById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySignUpById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySignUpService.queryById(id));
 	}
@@ -101,7 +100,7 @@ public class ActivityController extends BaseController {
 	@ApiOperation("根据ID获取活动主办方信息")
 	@RequestMapping(value = { "/getActivitySponsorById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivitySponsorById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivitySponsorById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activitySponsorService.queryById(id));
 	}
@@ -117,7 +116,7 @@ public class ActivityController extends BaseController {
 	@ApiOperation("根据ID获取活动评价信息")
 	@RequestMapping(value = { "/getActivityReviewById" }, produces = { "application/json;charset=UTF-8" }, 
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody Result getActivityReviewById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Result getActivityReviewById(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		return new Result(1, null, activityReviewService.queryById(id));
 	}
@@ -133,8 +132,6 @@ public class ActivityController extends BaseController {
 			LOGGER.info(String.format("报名失败，不能重复报名 :  activityId=[%d], phone=[%s]", activitySignUp.getActivityId(), activitySignUp.getPhone()));
 			return new Result(0, "报名失败，不能重复报名", null);
 		}
-		
-		activitySignUp.setId(StringUtil.getDateId());
 		activitySignUp.setStatus(0);
 		activitySignUp.setSignUpTime(new Date());
 		activitySignUp.setCreateTime(new Date());
@@ -155,8 +152,6 @@ public class ActivityController extends BaseController {
 					activityReview.getActivityId(), activityReview.getActivitySignUpId()));
 			return new Result(0, "评价失败，不能重复评价", null);
 		}
-
-		activityReview.setId(StringUtil.getDateId());
 		activityReview.setCreateTime(new Date());
 		activityReview.setUpdateTime(new Date());
 		activityReviewService.add(activityReview);
@@ -174,7 +169,6 @@ public class ActivityController extends BaseController {
 			LOGGER.info(String.format("收藏失败，不能重复收藏 :  activityId=[%d], phone=[%s]", activityMemberLike.getActivityId(), activityMemberLike.getPhone()));
 			return new Result(0, "收藏失败，不能重复收藏", null);
 		}
-		
 		activityMemberLikeService.add(activityMemberLike);
 		return new Result(1, "收藏成功", null);
 	}
