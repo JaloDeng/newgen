@@ -24,10 +24,10 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 	
 	@Transactional
 	public Result save(ActivitySponsor activitySponsor) throws Exception {
-		activitySponsor.setUpdateTime(new Date());
 		if (activitySponsorMapper.countByName(activitySponsor) > 0) {
 			return new Result(0, String.format("保存失败，主办方[%s]已存在", activitySponsor.getName()), null);
 		}
+		activitySponsor.setUpdateTime(new Date());
 		if (activitySponsor.getId() == null) {
 			activitySponsor.setCreateTime(new Date());
 			activitySponsorMapper.add(activitySponsor);
