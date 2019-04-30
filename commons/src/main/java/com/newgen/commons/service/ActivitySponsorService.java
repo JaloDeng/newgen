@@ -36,10 +36,9 @@ public class ActivitySponsorService extends BaseService<ActivitySponsor> {
 		if (activitySponsor.getId() == null) {
 			activitySponsor.setCreateTime(new Date());
 			activitySponsorMapper.add(activitySponsor);
-			return new Result(1, "添加成功", null);
 		} else {
 			activitySponsorMapper.update(activitySponsor);
-			return new Result(1, "修改成功", null);
 		}
+		return new Result(1, "保存成功", null);
 	}
 }

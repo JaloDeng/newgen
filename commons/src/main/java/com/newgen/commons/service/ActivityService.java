@@ -50,12 +50,10 @@ public class ActivityService extends BaseService<Activity> {
 		List<Long> oldActivityPackageIds = new ArrayList<>();
 		List<Long> newActivityPackageIds = new ArrayList<>();
 		activity.setUpdateTime(new Date());
-		String msg = "修改成功";
 		// 新增或者更新t_activity表
 		if (activity.getId() == null) {
 			activity.setCreateTime(new Date());
 			activityMapper.add(activity);
-			msg = "新增成功";
 		} else {
 			oldActivityPackageIds = activityPackageMapper.findIdByActivityId(activity.getId());
 			activityMapper.update(activity);
@@ -78,8 +76,7 @@ public class ActivityService extends BaseService<Activity> {
 				activityPackageMapper.delete(id);
 			}
 		});
-		
-		return new Result(1, msg, null);
+		return new Result(1, "保存成功", null);
 	}
 	
 	/**
