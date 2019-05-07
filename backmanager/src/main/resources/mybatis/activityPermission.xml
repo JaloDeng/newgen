@@ -25,6 +25,11 @@
 		</if>
 	</select>
 	
+	<select id="findAll" parameterType="Object" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_permission
+	</select>
+	
 	<select id="queryById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> 
 		from t_activity_permission
