@@ -7,27 +7,44 @@
 	<resultMap id="BaseResultMap" type="com.newgen.backmanager.bean.ActivityRole" >
 		<result column="id" property="id" />
 		<result column="name" property="name" />
+		<result column="nameZh" property="nameZh" />
 		<result column="createTime" property="createTime" />
 		<result column="updateTime" property="updateTime" />
 	</resultMap>
 	
 	<!-- sys_user table all fields -->
 	<sql id="Base_Column_List" >
-		id, name, createTime, updateTime
+		id, name, nameZh, createTime, updateTime
 	</sql>
 	
 	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> 
-		from t_activity_role
-		<if test="index != null and row != null">
-			limit ${index}, ${row}
-		</if>
+		from t_activity_role where id != 1
 	</select>
+	
+	<insert id="add" parameterType="com.newgen.backmanager.bean.ActivityRole">
+		INSERT INTO t_activity_role(name, nameZh, createTime, updateTime)
+		values(#{name}, #{nameZh}, #{createTime}, #{updateTime})
+	</insert>
+	
+	<insert id="addMenuByRoleId">
+		INSERT INTO t_activity_role_menu (activityRoleId, activityMenuId) VALUES
+		<foreach collection="menuIds" item="activityMenuId" separator=",">
+			(#{activityRoleId}, #{activityMenuId})
+		</foreach>
+	</insert>
 	
 	<select id="queryById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> 
 		from t_activity_role
 		where id = #{value}
 	</select>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM t_activity_role WHERE id = #{id}
+	</delete>
 
+	<delete id="deleteMenuByRoleId" parameterType="java.lang.Integer">
+		DELETE FROM t_activity_role_menu WHERE activityRoleId = #{roleId}
+	</delete>
 </mapper>

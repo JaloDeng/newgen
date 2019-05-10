@@ -20,18 +20,12 @@ public class BaseService<T> {
 	@Autowired
 	private BaseMapper<T> baseMapper;
 	
-	public void add(T t) throws Exception {
-		baseMapper.add(t);
+	public Integer add(T t) throws Exception {
+		return baseMapper.add(t);
 	}
 
-	public boolean update(T t) {
-		try {
-			baseMapper.update(t);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public Integer update(T t) {
+		return baseMapper.update(t);
 	}
 
 	public void delete(Object... ids) throws Exception {

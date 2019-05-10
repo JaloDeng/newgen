@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.backmanager.mapper.ActivityMenuMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.backmanager.bean.ActivityMenu" >
+		<id column="id" property="id" />
+		<result column="url" property="url" />
+		<result column="path" property="path" />
+		<result column="component" property="component" />
+		<result column="name" property="name" />
+		<result column="iconCls" property="iconCls" />
+		<result column="keepAlive" property="keepAlive" />
+		<result column="parentId" property="parentId" />
+		<association property="meta" javaType="com.newgen.backmanager.bean.ActivityMenuMeta">
+			<result column="keepAlive" property="keepAlive"/>
+			<result column="requireAuth" property="requireAuth"/>
+		</association>
+		<collection property="roles" ofType="com.newgen.backmanager.bean.ActivityRole">
+			<id column="rId" property="id" />
+			<result column="rName" property="name" />
+			<result column="rNameZh" property="nameZh" />
+		</collection>
+		<collection property="children" ofType="com.newgen.backmanager.bean.ActivityMenu">
+			<id column="id2" property="id" />
+			<result column="path2" property="path" />
+			<result column="component2" property="component" />
+			<result column="name2" property="name" />
+			<result column="iconCls2" property="iconCls" />
+			<association property="meta" javaType="com.newgen.backmanager.bean.ActivityMenuMeta">
+				<result column="keepAlive2" property="keepAlive"/>
+				<result column="requireAuth2" property="requireAuth"/>
+			</association>
+			<collection property="children" ofType="com.newgen.backmanager.bean.ActivityMenu">
+				<id column="id3" property="id" />
+				<result column="name3" property="name" />
+			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, url, path, component, name, iconCls, keepAlive, requireAuth, parentId
+	</sql>
+	
+	<select id="findList" parameterType="Object" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_menu
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		select 
+			m.*,
+			r.id as rId,
+			r.name as rName,
+			r.nameZh as rNameZh
+		from t_activity_menu m
+		left join t_activity_role_menu rm on rm.activityMenuId = m.id
+		left join t_activity_role r on r.id = rm.activityRoleId
+		order by m.id desc
+	</select>
+	
+	<select id="queryById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_menu
+		where id = #{value}
+	</select>
+
+	<select id="queryByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+			m1.id,
+			m1.path,
+			m1.component,
+			m1.iconCls,
+			m1.name,
+			m1.requireAuth,
+			m2.component as component2,
+			m2.iconCls as iconCls2,
+			m2.keepAlive as keepAlive2,
+			m2.name as name2,
+			m2.path as path2,
+			m2.requireAuth as requireAuth2
+		from t_activity_menu m1
+		inner join t_activity_menu m2 on m2.parentId = m1.id
+		where m1.id != 1
+			and m2.id in (select rm.activityMenuId from t_activity_role_menu rm, t_activity_user_role ur where ur.activityRoleId = rm.activityRoleId and ur.activityUserId = #{userId})
+		order by m1.id, m2.id
+	</select>
+	
+	<select id="menuTree" resultMap="BaseResultMap">
+		select 
+			m1.id,
+			m1.name,
+			m2.id as id2,
+			m2.name as name2,
+			m3.id as id3,
+			m3.name as name3
+		from t_activity_menu m1
+		inner join t_activity_menu m2 on m2.parentId = m1.id
+		inner join t_activity_menu m3 on m3.parentId = m2.id
+	</select>
+	
+	<select id="getMenuIdByRoleId" resultType="java.lang.Integer">
+		select rm.activityMenuId from t_activity_role_menu rm where rm.activityRoleId = #{roleId}
+	</select>
+</mapper>

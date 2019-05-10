@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.newgen.backmanager.mapper.ActivityUserMapper" >
+
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="com.newgen.backmanager.bean.ActivityUser" >
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="telephone" property="telephone"/>
+		<result column="address" property="address"/>
+		<result column="enabled" property="enabled"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="userface" property="userface"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	<resultMap id="lazyLoadRoles" type="com.newgen.backmanager.bean.ActivityUser" extends="BaseResultMap">
+		<collection property="roles" ofType="com.newgen.backmanager.bean.ActivityRole" select="com.newgen.backmanager.mapper.ActivityUserMapper.getRolesByUserId" 
+			column="id"></collection>
+	</resultMap>
+	<resultMap id="eagerLoadRoles" type="com.newgen.backmanager.bean.ActivityUser" extends="BaseResultMap">
+		<collection property="roles" ofType="com.newgen.backmanager.bean.ActivityRole">
+			<id column="rId" property="id" />
+			<result column="rName" property="name" />
+			<result column="rNameZh" property="nameZh" />
+		</collection>
+	</resultMap>
+	
+	<!-- sys_user table all fields -->
+	<sql id="Base_Column_List" >
+		id, name, phone, telephone, address, enabled, username, password, userface, remark
+	</sql>
+	
+	<select id="loadUserByUsername" resultMap="lazyLoadRoles">
+		select <include refid="Base_Column_List" /> from t_activity_user where username = #{username}
+	</select>
+	
+	<select id="getRolesByUserId" resultType="com.newgen.backmanager.bean.ActivityRole">
+		select r.*
+		from t_activity_user_role ur
+		inner join t_activity_role r on r.id = ur.activityRoleId
+		where ur.activityUserId = #{userId}
+	</select>
+	
+	<select id="getUserByKeywords" resultMap="eagerLoadRoles">
+		select
+			u.*
+		from t_activity_user u
+		left join t_activity_user_role ur on ur.activityUserId = u.id
+		left join t_activity_role r on r.id = ur.activityRoleId
+		where u.id not in (select ur1.activityUserId from t_activity_user_role ur1, t_activity_role r1 where ur1.activityRoleId = r1.id and r1.nameZh = '系统管理员')
+			and u.name like concat('%',#{keywords},'%')
+	</select>
+	
+	<select id="queryById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from t_activity_user u 
+		left join t_activity_user_role ur on ur.activityUserId = u.id
+		left join t_activity_role r on r.id = ur.activityRoleId
+		where u.id = #{id}
+	</select>
+	
+	<select id="getUserById" resultMap="eagerLoadRoles">
+		select 
+			u.*,
+			r.id as rId,
+			r.name as rName,
+			r.nameZh as rNameZh
+		from t_activity_user u 
+		left join t_activity_user_role ur on ur.activityUserId = u.id
+		left join t_activity_role r on r.id = ur.activityRoleId
+		where u.id = #{id}
+	</select>
+	
+	<select id="findList">
+		select <include refid="Base_Column_List" /> 
+		from t_activity_user
+		<if test="currentId != null">
+			where id = #{currentId}
+		</if>
+	</select>
+	
+	<insert id="add" parameterType="com.newgen.backmanager.bean.ActivityUser">
+		INSERT INTO t_activity_user(name, phone, telephone, address, username, password, userface, remark)
+		values(#{name}, #{phone}, #{telephone}, #{address}, #{username}, #{password}, #{userface}, #{remark})
+	</insert>
+	
+	<update id="update" parameterType="com.newgen.backmanager.bean.ActivityUser">
+		update t_activity_user
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				telephone = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="enabled != null">
+				enabled = #{enabled,jdbcType=BIT},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userface != null">
+				userface = #{userface,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM t_activity_user WHERE id = #{id}
+	</delete>
+	
+	<insert id="addRolesForUser">
+		INSERT INTO t_activity_user_role(activityUserId, activityRoleId) 
+		<foreach collection="activityRoleIds" separator="," item="activityRoleId">
+			values(#{activityUserId}, #{activityRoleId})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteUserRoleByUserId" parameterType="java.lang.Integer">
+		DELETE FROM t_activity_user_role WHERE activityUserId = #{userId}
+	</delete>
+</mapper>

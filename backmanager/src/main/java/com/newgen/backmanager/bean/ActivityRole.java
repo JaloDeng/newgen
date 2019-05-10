@@ -14,6 +14,8 @@ public class ActivityRole {
 	
 	private String name;
 	
+	private String nameZh;
+	
 	private Date createTime;
 	
 	private Date updateTime;
@@ -34,6 +36,14 @@ public class ActivityRole {
 		this.name = name;
 	}
 
+	public String getNameZh() {
+		return nameZh;
+	}
+
+	public void setNameZh(String nameZh) {
+		this.nameZh = nameZh;
+	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -50,10 +60,4 @@ public class ActivityRole {
 		this.updateTime = updateTime;
 	}
 
-	@Override
-	public String toString() {
-		return "ActivityRole [id=" + id + ", name=" + name + ", createTime=" + createTime + ", updateTime=" + updateTime
-				+ "]";
-	}
-	
 }

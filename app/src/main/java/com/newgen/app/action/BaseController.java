@@ -44,8 +44,8 @@ public class BaseController {
 		if (list.size() < type.getMaxTimes()) {
 			MemberPoints memberPoints = memberPointsService.findByMemberId(memberId);
 			memberPoints.setPoints(memberPoints.getPoints() + type.getPoints());
-			Boolean updateMemberPoints = memberPointsService.update(memberPoints);
-			if (updateMemberPoints) {
+			Integer updateMemberPointsCount = memberPointsService.update(memberPoints);
+			if (updateMemberPointsCount == 1) {
 				memberPointsLogService.add(memberPointsLogService.newMemberPointsLog(memberId, type));
 				return true;
 			}

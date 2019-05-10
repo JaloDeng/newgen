@@ -186,51 +186,73 @@ CREATE TABLE `t_activity_review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动评价表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
+-- 活动系统用户表
+-- ----------------------------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `t_activity_user`;
+CREATE TABLE `t_activity_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `phone` varchar(50) DEFAULT NULL COMMENT '手机号码',
+  `telephone` varchar(50) DEFAULT NULL COMMENT '固定电话号码',
+  `address` varchar(200) DEFAULT NULL COMMENT '联系地址',
+  `enabled` tinyint(1) DEFAULT '1',
+  `username` varchar(100) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(255) DEFAULT NULL COMMENT '密码',
+  `userface` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='活动系统用户表';
+
+-- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 活动系统角色表
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `t_activity_role`;
 CREATE TABLE `t_activity_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `name` varchar(200) DEFAULT NULL COMMENT '角色名称',
+  `name` varchar(50) DEFAULT NULL COMMENT '角色名称',
+  `nameZh` varchar(50) DEFAULT NULL COMMENT '角色名称（中文）',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统角色表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
--- 活动系统权限表
+-- 活动系统菜单表
 -- ----------------------------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `t_activity_permission`;
-CREATE TABLE `t_activity_permission` (
+DROP TABLE IF EXISTS `t_activity_menu`;
+CREATE TABLE `t_activity_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `name` varchar(200) DEFAULT NULL COMMENT '名称',
-  `description` varchar(500) DEFAULT NULL COMMENT '描述',
-  `url` varchar(255) DEFAULT NULL COMMENT '请求网址',
+  `url` varchar(100) DEFAULT NULL,
+  `path` varchar(100) DEFAULT NULL,
+  `component` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+  `iconCls` varchar(100) DEFAULT NULL COMMENT '图标',
+  `keepAlive` tinyint(1) DEFAULT NULL,
+  `requireAuth` tinyint(1) DEFAULT NULL,
   `parentId` int(11) DEFAULT NULL COMMENT '父节点',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统权限表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统菜单表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
 -- 报名系统用户角色中间表
 -- ----------------------------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `t_activity_admin_role`;
-CREATE TABLE `t_activity_admin_role` (
+DROP TABLE IF EXISTS `t_activity_user_role`;
+CREATE TABLE `t_activity_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `adminId` int(11) DEFAULT NULL COMMENT '用户表主键，t_admin.id',
+  `activityUserId` int(11) DEFAULT NULL COMMENT '活动系统用户表主键，t_activity_user.id',
   `activityRoleId` int(11) DEFAULT NULL COMMENT '活动系统角色表主键，t_activity_role.id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统用户角色中间表';
 
 -- ----------------------------------------------------------------------------------------------------------------------------------------
--- 报名系统用户角色中间表
+-- 报名系统角色权限中间表
 -- ----------------------------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `t_activity_role_permission`;
-CREATE TABLE `t_activity_role_permission` (
+CREATE TABLE `t_activity_role_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `activityRoleId` int(11) DEFAULT NULL COMMENT '活动系统角色表主键，t_activity_role.id',
-  `activityPermissionId` int(11) DEFAULT NULL COMMENT '报名系统权限表主键，t_activity_permission.id',
+  `activityMenuId` int(11) DEFAULT NULL COMMENT '报名系统菜单表主键，t_activity_menu.id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统角色权限中间表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报名系统角色菜单中间表';
 
 
 
