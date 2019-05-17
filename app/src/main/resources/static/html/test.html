@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script type="text/javascript">
+	var signUp = function() {
+		$.ajax({
+			  type: 'post',
+			  url: '/activitySignUp',
+			  contentType: 'application/json;charset=utf-8',
+			  data: {
+			    name: '超桑',
+			    phone: '13123456789',
+			    idcard: '11111111',
+			    activityId: 3,
+			    activityPackageId: 4
+			  },
+			  success: function( result ) {
+			    alert(result);
+			  },
+			  dataType: 'json'
+			});
+	}
+</script>
+</head>
+<body>
+<form action="/activitySignUp" method="post">
+name:<input id="name" name="name"><br/>
+phone:<input id="phone" name="phone"><br/>
+idcard:<input id="idcard" name="idcard"><br/>
+<input type="submit" value="Submit" />
+</form>
+<button onclick="signUp()">提交</button>
+</body>
+</html>
