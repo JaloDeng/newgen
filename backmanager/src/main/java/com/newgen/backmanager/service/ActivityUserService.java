@@ -49,6 +49,13 @@ public class ActivityUserService extends BaseService<ActivityUser> implements Us
 		return activityUserMapper.add(activityUser);
 	}
 	
+	@Override
+	public Integer update(ActivityUser activityUser) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		activityUser.setPassword(encoder.encode(activityUser.getPassword()));
+		return activityUserMapper.update(activityUser);
+	}
+	
 	public List<ActivityUser> getUserByKeywords(String keywords) {
 		return activityUserMapper.getUserByKeywords(keywords);
 	}

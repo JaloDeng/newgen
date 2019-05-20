@@ -42,10 +42,10 @@ public class CustomMetadataSource implements FilterInvocationSecurityMetadataSou
 				List<ActivityRole> activityRoles = activityMenu.getRoles();
 				Integer size = activityRoles.size();
 				String[] values = new String[size];
-				 for (int i = 0; i < size; i++) {
-					 values[i] = activityRoles.get(i).getName();
-				 }
-				 return SecurityConfig.createList(values);
+				for (int i = 0; i < size; i++) {
+					values[i] = activityRoles.get(i).getName();
+				}
+				return SecurityConfig.createList(values);
 			}
 		}
 		return SecurityConfig.createList("ROLE_LOGIN");

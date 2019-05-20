@@ -55,7 +55,7 @@
 	</select>
 	
 	<select id="queryById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />
+		select u.*
 		from t_activity_user u 
 		left join t_activity_user_role ur on ur.activityUserId = u.id
 		left join t_activity_role r on r.id = ur.activityRoleId

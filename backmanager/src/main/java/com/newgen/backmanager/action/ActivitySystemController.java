@@ -169,10 +169,10 @@ public class ActivitySystemController {
 			throws Exception {
 		try {
 			activityUserService.update(activityUser);
-			return new Result(1, "删除成功", null);
+			return new Result(1, "修改成功", null);
 		} catch (Exception e) {
 			LOGGER.error(e.toString());
-			return new Result(0, "删除失败", null);
+			return new Result(0, "修改失败", null);
 		}
 	}
 	

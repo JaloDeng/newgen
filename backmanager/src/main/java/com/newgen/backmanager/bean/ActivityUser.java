@@ -98,7 +98,7 @@ public class ActivityUser implements UserDetails {
 		this.username = username;
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
