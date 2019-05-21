@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,6 +32,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newgen.backmanager.service.ActivityUserService;
+import com.newgen.commons.config.Swagger2Config;
 import com.newgen.commons.model.Result;
 
 /**
@@ -41,6 +43,7 @@ import com.newgen.commons.model.Result;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@AutoConfigureBefore({ Swagger2Config.class })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -62,9 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/index.html", "/abc.html", "/static/**", "**.css",
-				"/swagger-ui.html", "/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources", 
-				"/swagger-resources/configuration/security", "/swagger-resources/**");
+		web.ignoring().antMatchers("/index.html", "/abc.html", "/static/**", "**.css");
 	}
 	
 	@Override
@@ -142,6 +143,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						}
 					})
 					.permitAll()
+				.and()
+					.cors()
 				.and()
 				.csrf()
 					.disable()
