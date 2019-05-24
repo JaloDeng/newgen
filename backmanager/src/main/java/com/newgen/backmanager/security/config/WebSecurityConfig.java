@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -31,6 +32,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.newgen.backmanager.bean.ActivityUser;
 import com.newgen.backmanager.service.ActivityUserService;
 import com.newgen.commons.config.Swagger2Config;
 import com.newgen.commons.model.Result;
@@ -65,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/index.html", "/abc.html", "/static/**", "**.css");
+		web.ignoring().antMatchers("/index.html", "/abc.html", "/static/**", "/login_p", "/favicon.ico", "/");
 	}
 	
 	@Override
@@ -117,7 +119,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 								Authentication authentication) throws IOException, ServletException {
 							response.setContentType("application/json;charset=utf-8");
-							Result result = new Result(1, "登陆成功", null);
+							ActivityUser user =  (ActivityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+							Result result = new Result(1, "登陆成功", user);
 							ObjectMapper om = new ObjectMapper();
 							PrintWriter pw = response.getWriter();
 							pw.write(om.writeValueAsString(result));
