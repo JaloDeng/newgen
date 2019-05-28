@@ -67,7 +67,7 @@ public class ActivityController {
 			method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody Result getActivityList(@RequestBody Map<String, Object> params, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return new Result(1, null, activityService.findList(params));
+		return new Result(1, null, activityService.findByConditions(params), activityService.findCountByConditions(params));
 	}
 	
 	@ApiOperation("根据ID获取报名信息")

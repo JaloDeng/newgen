@@ -3,6 +3,7 @@ package com.newgen.commons.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,5 +86,15 @@ public class ActivityService extends BaseService<Activity> {
 		if (count != 1) {
 			throw new RuntimeException("修改条数不是一条");
 		}
+	}
+	
+	public List<Map<String, Object>> findByConditions(Map<String, Object> params) {
+		ifPaging(params);
+		return activityMapper.findByConditions(params);
+	}
+	
+	public Integer findCountByConditions(Map<String, Object> params) {
+		ifPaging(params);
+		return activityMapper.findCountByConditions(params);
 	}
 }

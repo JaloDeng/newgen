@@ -1,6 +1,8 @@
 package com.newgen.commons.mapper;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +19,8 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 	public Integer updateStatusById(@Param("id") Long id, @Param("status") Integer status, @Param("updateTime") Date updateTime);
 
 	public Integer countByTitle(Activity activity);
+	
+	public List<Map<String, Object>> findByConditions(Map<String, Object> params);
+	
+	public Integer findCountByConditions(Map<String, Object> params);
 }

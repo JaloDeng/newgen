@@ -137,6 +137,62 @@
 		</if>
 	</select>
 	
+	<select id="findByConditions" parameterType="Object" resultType="java.util.Map">
+		select 
+			a.id, 
+			a.title, 
+			a.status, 
+			case a.status when -1 then '报名结束' when 0 then '新建' when 1 then '审核中' when 2 then '审核通过' when 3 then '报名结束' end AS statusName, 
+			a.summary, 
+			asp.name AS sponsor, 
+			asp.logoPath AS logoPath, 
+			IFNULL(a.homePath, '') AS homePath, 
+			case when COUNT(asp.id) &gt; 1 then CONCAT('¥', MIN(ap.price), '起') else if(ap.price = 0, '免费', CONCAT('¥', ap.price)) end AS price, 
+			a.serialNumber, 
+			a.clickCount, 
+			a.address,
+			a.fromTime,
+			a.toTime,
+			a.releaseTime
+		from t_activity a
+		inner join t_activity_sponsor asp on asp.id = a.sponsorId
+		inner join t_activity_package ap on ap.activityId = a.id
+		<where>
+		<if test="title != null and title != ''">
+			AND a.title like CONCAT('%', '${title}', '%')
+		</if>
+		<if test="sponsor != null and sponsor != ''">
+			AND asp.name like CONCAT('%', '${sponsor}', '%')
+		</if>
+		</where>
+		group by a.id
+		order by a.releaseTime desc
+		<if test="index != null and row != null">
+			limit ${index}, ${row}
+		</if>
+	</select>
+	<select id="findCountByConditions" parameterType="Object" resultType="java.lang.Integer">
+		select
+			count(1)
+		from (
+			select 
+				count(a.id)
+			from t_activity a
+			inner join t_activity_sponsor asp on asp.id = a.sponsorId
+			inner join t_activity_package ap on ap.activityId = a.id
+			<where>
+			<if test="title != null and title != ''">
+				AND a.title like CONCAT('%', '${title}', '%')
+			</if>
+			<if test="sponsor != null and sponsor != ''">
+				AND asp.name like CONCAT('%', '${sponsor}', '%')
+			</if>
+			</where>
+			group by a.id
+			order by a.releaseTime desc
+		) activity
+	</select>
+	
 	<select id="queryById" parameterType="Object" resultMap="mapBaseResult">
 		select 
 			a.*, 
