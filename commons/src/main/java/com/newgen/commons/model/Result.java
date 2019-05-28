@@ -13,7 +13,11 @@ public class Result {
 	private String msg;
 	
 	private Object data;
+	
+	private Integer total;
 
+	public Result() {}
+	
 	/**
 	 * 返回结果集
 	 * @param ret 1:成功，0：失败/已存在
@@ -24,6 +28,21 @@ public class Result {
 		this.ret = ret;
 		this.msg = msg;
 		this.data = data;
+		this.total = 0;
+	}
+	
+	/**
+	 * 返回结果集
+	 * @param ret 1:成功，0：失败/已存在
+	 * @param msg 信息
+	 * @param data 数据
+	 * @param total 函数
+	 */
+	public Result(Integer ret, String msg, Object data, Integer total) {
+		this.ret = ret;
+		this.msg = msg;
+		this.data = data;
+		this.total = total;
 	}
 
 	public Integer getRet() {
@@ -50,9 +69,12 @@ public class Result {
 		this.data = data;
 	}
 
-	@Override
-	public String toString() {
-		return "Result [ret=" + ret + ", msg=" + msg + ", data=" + data + "]";
+	public Integer getTotal() {
+		return total;
 	}
-	
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
 }
