@@ -63,7 +63,10 @@ public class BaseService<T> {
 		return baseMapper.count(params);
 	}
 	
-	private void ifPaging(Map<String, Object> params) {
+	protected void ifPaging(Map<String, Object> params) {
+		if (params.containsKey("size") && params.get("size") != null) {
+			params.put("row", params.get("size"));
+		}
 		if (params.containsKey("page") && params.containsKey("row") && params.get("page") != null && params.get("row") != null) {
 			try {
 				Integer row = Integer.valueOf(params.get("row").toString());
