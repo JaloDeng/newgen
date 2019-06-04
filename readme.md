@@ -1,28 +1,17 @@
-[![Build Status](https://travis-ci.org/zhoutaoo/SpringCloud.svg?branch=master)](https://travis-ci.org/zhoutaoo/SpringCloud)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![codecov](https://codecov.io/gh/zhoutaoo/SpringCloud/branch/master/graph/badge.svg)](https://codecov.io/gh/zhoutaoo/SpringCloud)
-
 ## 快速开始
 
 ### 先决条件
 
-首先本机先要安装以下环境，建议先学习了解springboot和springcloud基础知识。
-
-- [git](https://git-scm.com/)
 - [java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 
-- [maven](http://maven.apache.org/) 
+- [gradle](https://gradle.org/) 
 
-### 开发环境
+### 开发指南
 
-1. 克隆代码库： `git clone https://gitee.com/toopoo/SpringCloud.git`
+1. 克隆代码库： `git clone http://172.16.8.80:3000/JaloDeng/newgen.git`
 
-2. 安装公共库到本地仓库： 
-
-`cd common && mvn install`
-
-`cd auth/authentication-client && mvn install`
-
-3. 生成ide配置： `mvn idea:idea` 并导入对应的ide进行开发，IDE安装lombok插件（很重要，否则IDE会显示编译报错）
+2. 导入IDE(Eclipse或Idea)
+  (1) 在主目录下进入CMD命令行工具输入 `gradle eclipse` 或 `gradle idea` 导入相应依赖包
+  (2) 导入Eclipse或者Idea进行开发
 
 ### 编译 & 启动
 
