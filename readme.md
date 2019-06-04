@@ -9,8 +9,8 @@
 
 1. 克隆代码库： `git clone http://172.16.8.80:3000/JaloDeng/newgen.git`
 
-2. 导入IDE(Eclipse或Idea)
-  (1) 在主目录下进入CMD命令行工具输入 `gradle eclipse` 或 `gradle idea` 导入相应依赖包
+2. 导入IDE(Eclipse或Idea)<br>
+  (1) 在主目录下进入CMD命令行工具输入 `gradle eclipse` 或 `gradle idea` 导入相应依赖包<br>
   (2) 导入Eclipse或者Idea进行开发
 
 ### 编译 & 启动
