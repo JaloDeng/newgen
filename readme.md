@@ -1,17 +1,72 @@
-## 快速开始
+## 前言
+报名系统项目后端代码采用springboot、mybatis框架，前端采用Vue + Element-Ui
 
-### 先决条件
+### 环境
 
-- [java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 
-- [gradle](https://gradle.org/) 
+- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 
+- [Gradle](https://gradle.org/) 
+- [Maven](http://maven.apache.org/) 
+- [Mysql 5.7](https://www.mysql.com/) 
 
-### 开发指南
+### 项目结构
 
-1. 克隆代码库： `git clone http://172.16.8.80:3000/JaloDeng/newgen.git`
+```
+├── app                                    -- 手机端用户报名项目
+│   ├── src/main/java                         -- 类文件
+│        ├── com/newgen/app                    -- 包名
+│             ├── action                         -- 接口层(controller)文件
+│             ├── bean                           -- 持久化对象文件
+│             ├── handler                        -- 项目配置统一处理文件
+│             ├── mapper                         -- mybatis数据库操作接口文件
+│             ├── service                        -- 逻辑层(service)文件
+│             ├── util                           -- 工具类文件
+│             └── AppApplication.java            -- 项目启动入口文件
+│   ├── src/main/resources                    -- 资源文件
+│             ├── mybatis                        -- 逻辑层(service)文件
+│             ├── static                         -- 资源静态文件
+│             └── application.properties         -- springboot项目配置文件
+│   └── build.gradle                          -- Gradle配置文件
+├── backmanager                            -- 后台管理系统项目
+│   ├── src/main/java                         -- 类文件
+│        ├── com/newgen/backmanager            -- 包名
+│             ├── action                         -- 接口层(controller)文件
+│             ├── bean                           -- 持久化对象文件
+│             ├── exception                      -- 异常处理文件
+│             ├── mapper                         -- mybatis数据库操作接口文件
+│             ├── security/config                -- springsecurity配置文件
+│             ├── service                        -- 逻辑层(service)文件
+│             └── BackmanagerApplication.java    -- 项目启动入口文件
+│   ├── src/main/resources               -- 资源文件
+│             ├── mybatis                   -- 逻辑层(service)文件
+│             ├── static                    -- 资源静态文件
+│             └── application.properties    -- springboot项目配置文件
+│   └── build.gradle                     -- Gradle配置文件
+├── commons                              -- 通用底层项目
+│   ├── src/main/java                         -- 类文件
+│        ├── com/newgen/commons                -- 包名
+│             ├── action                         -- 接口层(controller)文件
+│             ├── bean                           -- 持久化对象文件
+│             ├── config                         -- 通用配置文件
+│             ├── mapper                         -- mybatis数据库操作接口文件
+│             ├── model                          -- 通用对象文件
+│             ├── service                        -- 逻辑层(service)文件
+│             └── CommonsApplication.java        -- 项目启动入口文件
+│   ├── src/main/resources               -- 资源文件
+│             ├── mybatis                   -- 逻辑层(service)文件
+│             └── application.properties    -- springboot项目配置文件
+│   └── build.gradle                     -- Gradle配置文件
+├── sql                                  -- 数据库文件夹
+│   └── db.sql                              -- 数据表和初始数据
+├── readme.md                            -- readme文档入口
+├── build.gradle                         -- Gradle配置文件
+└── settings.gradle                      -- Gradle配置文件
+```
 
-2. 导入IDE(Eclipse或Idea)<br>
+2. 如果要开发可导入IDE(Eclipse或Idea)<br>
   (1) 在主目录下进入CMD命令行工具输入 `gradle eclipse` 或 `gradle idea` 导入相应依赖包<br>
   (2) 导入Eclipse或者Idea进行开发
+  
+3. 
 
 ### 编译 & 启动
 
