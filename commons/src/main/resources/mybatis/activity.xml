@@ -153,7 +153,8 @@
 			a.address,
 			a.fromTime,
 			a.toTime,
-			a.releaseTime
+			a.releaseTime,
+			a.detail
 		from t_activity a
 		inner join t_activity_sponsor asp on asp.id = a.sponsorId
 		inner join t_activity_package ap on ap.activityId = a.id
@@ -240,5 +241,8 @@
 
 	<select id="countByTitle" parameterType="Object" resultType="java.lang.Integer">
 		select count(1) from t_activity where title = #{title}
+		<if test="id != null">
+			and id != #{id}
+		</if>
 	</select>
 </mapper>
