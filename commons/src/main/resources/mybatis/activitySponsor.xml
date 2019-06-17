@@ -52,20 +52,20 @@
 	<sql id="Example_Where_Clause">
 		where 1=1
 		<trim  suffixOverrides="," >
-		<if test="id != null" >
+		<if test="id != null and id != ''" >
 		    and id = #{id}
 		</if>
 		<if test="serialNumber != null and serialNumber != ''" >
-		    and serialNumber = #{serialNumber}
+		    and serialNumber like CONCAT('%', '${serialNumber}', '%')
 		</if>
 		<if test="name != null and name != ''" >
-		    and name = #{name}
+		    and name like CONCAT('%', '${name}', '%')
 		</if>
 		<if test="contact != null and contact != ''" >
-		    and contact = #{contact}
+		    and contact like CONCAT('%', '${contact}', '%')
 		</if>
 		<if test="phone != null and phone != ''" >
-		    and phone = #{phone}
+		    and phone like CONCAT('%', '${phone}', '%')
 		</if>
 		</trim>
 	</sql>
@@ -95,6 +95,7 @@
 			asp.createTime,
 			asp.updateTime
 		from t_activity_sponsor asp
+		<include refid="Example_Where_Clause"/>
 		<if test="index != null and row != null">
 			limit ${index}, ${row}
 		</if>
